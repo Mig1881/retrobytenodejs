@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link href="styles.css" rel="stylesheet">
+        <script type="module" src="index.js"></script>
+    </head>
+    <body onload="readProducts()">
+        <!-- Falta realizar la funcion javascript para hacr un post, esta hecha con hottscocth 
+         todavua sin linkar con el backend, prueba de rama de GIT-->
+        <!-- El onload esta llamando a una funcion de javascript -->
+        <header>
+            <h1>Añadimos un nuevo producto a la Bd y lo validamos</h1>
+        </header>
+        <div class="container">
+            <img src="nodejs.jpg" class="imagen" height="80%" width="80%"/>
+            <ul id="products" class="list-group">
+            </ul>
+            <div class="pantalla"></div>
+            <!-- comprobacion de linkado con mensaje -->
+            <hr/>
+            <form>
+                <div class="mb-3">
+                    <label for="product_name" class="form-label">Product Name</label>
+                    <input class="form-control" type="text" id="product_name"/>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input class="form-control" type="text" id="description"/>
+                </div>
+                <div class="mb-3">
+                    <label for="sale_price" class="form-label">Sale Price</label>
+                    <input class="form-control" type="number" id="sale_price"/>
+                </div>
+                <div class="mb-3">
+                    <label for="stock_units" class="form-label">Stocks Units</label>
+                    <input class="form-control" type="number" id="stock_units"/>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Imagen</label>
+                    <input class="form-control" type="text" id="image"/>
+                </div>
+                <div class="mb-3">
+                    <label for="release_date" class="form-label">Release Date</label>
+                    <input class="form-control" type="date" id="release_date"/>
+                </div>
+                <div class="mb-3">
+                    <label for="product_status" class="form-label">Product Status</label>
+                    <input class="form-control" type="text" id="product_status"/>
+                </div>
+                <div class="mb-3">
+                    <label for="id_supplier" class="form-label">Id Supllier</label>
+                    <input class="form-control" type="number" id="id_supplier"/>
+                </div>
+                <!-- <button type="button" class="btn btn-primary" onClick="addMovie()">Add Product</button> -->
+            </form>
+        </div>
+    </body>
+</html>
