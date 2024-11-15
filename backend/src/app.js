@@ -47,7 +47,6 @@ app.get('/products/:id_product', async (req, res) => {
 
 app.post('/products', async (req, res) => {
     await db('products').insert({
-        id_product: req.body.id_product,
         product_name: req.body.product_name,
         description: req.body.description,
         sale_price: req.body.sale_price,
@@ -77,6 +76,7 @@ app.put('/products/:id_product', async (req, res) => {
 });
 
 //NO ENTIENDO PORQUE AQUI HAY QUE DEFINIR UNA CONSTANTE, PREGUNTAR SANTI SI NO LO EXPLICA EL
+//Creo que daria exactamente lo mismo
 app.delete('/products/:id_product', async (req, res) => {
 
         const idProduct = req.params.id_product;

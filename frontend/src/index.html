@@ -11,47 +11,22 @@
             <h1>Ejemplo de API con Node.js y Base de Datos</h1>
         </header>
         <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Listado de Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Alta de Productos</a>
+                </li>
+            </ul>
             <img src="nodejs.jpg" class="imagen" height="80%" width="80%"/>
+            <h1>Listado de Productos</h1>
             <ul id="products" class="list-group">
             </ul>
-            <div class="pantalla"></div>
+            <!-- <div class="pantalla"></div> -->
             <!-- comprobacion de linkado con mensaje -->
             <hr/>
-            <form>
-                <div class="mb-3">
-                    <label for="product_name" class="form-label">Product Name</label>
-                    <input class="form-control" type="text" id="product_name"/>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <input class="form-control" type="text" id="description"/>
-                </div>
-                <div class="mb-3">
-                    <label for="sale_price" class="form-label">Sale Price</label>
-                    <input class="form-control" type="number" id="sale_price"/>
-                </div>
-                <div class="mb-3">
-                    <label for="stock_units" class="form-label">Stocks Units</label>
-                    <input class="form-control" type="number" id="stock_units"/>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Imagen</label>
-                    <input class="form-control" type="text" id="image"/>
-                </div>
-                <div class="mb-3">
-                    <label for="release_date" class="form-label">Release Date</label>
-                    <input class="form-control" type="date" id="release_date"/>
-                </div>
-                <div class="mb-3">
-                    <label for="product_status" class="form-label">Product Status</label>
-                    <input class="form-control" type="text" id="product_status"/>
-                </div>
-                <div class="mb-3">
-                    <label for="id_supplier" class="form-label">Id Supllier</label>
-                    <input class="form-control" type="number" id="id_supplier"/>
-                </div>
-                <!-- <button type="button" class="btn btn-primary" onClick="addMovie()">Add Product</button> -->
-            </form>
+            
         </div>
     </body>
 </html>
