@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { notifyError, notifyOk } from './dialogUtil.js';
+import { el } from './documentUtil.js';
 
 window.addProduct = function() {
     const product_name = document.getElementById('product_name').value;
@@ -12,14 +14,21 @@ window.addProduct = function() {
 
     // TODO Validación de datos faltan por validar mas datos
     if (product_name === '') {
-        alert('El nombre del producto es un campo obligatorio');
+        notifyError('El nombre del producto es un campo obligatorio');
         return;
     }
 
     if (description === '') {
-        alert('Descripcion es un campo obligatorio');
+        notifyError('Descripcion es un campo obligatorio');
         return;
     }
+
+    if (sale_price === '') {
+        notifyError('Precio de venta es un campo obligatorio');
+        return;
+    }
+
+
 
     axios.post('http://localhost:8081/products', {
         product_name: product_name,
@@ -31,4 +40,17 @@ window.addProduct = function() {
         product_status: product_status,
         id_supplier: id_supplier
     });
+
+    // TODO Confirmar al usuario que todo ha ido bien (o mal)
+    notifyOk('Pelicula registrada');
+
+    // TODO Limpiar el formulario
+    el('product_name').value = '';
+    el('description').value = '';
+    el('sale_price').value = '';
+    el('stock_units').value = '';
+    el('image').value = '';
+    el('release_date').value = '';
+    el('product_status').value = '';
+    el('id_supplier').value = '';
 };
