@@ -87,4 +87,63 @@
   .shadows:hover {
       text-shadow: -16px 6px 15px #ced0d3;
   }
+  .networks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vw;
+  }
+  .icon {
+    width: 25px;
+  }
   
+  .icon:hover {
+    background: white;
+    border-radius: 6%; 
+    box-shadow: 0px 0px 7px #54e3fd inset,
+                  0px 0px 7px #54e3fd;  
+  } 
+  
+  footer{
+    background-image: url('./img/retrobyte-matrix.gif');
+    background-size: contain;
+    color:#fff;
+    padding: 20 px 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+   
+  .footer-container{
+    width:100%;
+  }
+  .footer-row{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+  }
+  .footer-col{
+    text-align: left;
+  }
+   
+  .footer-col ul{
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-col ul li{
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2vw;
+  }
+  .footer-col ul li a:hover {
+    background: rgb(50, 146, 205);
+    border-radius: 6%; 
+    box-shadow: 0px 0px 7px rgb(50, 146, 205) inset,
+                  0px 0px 7px rgb(50, 146, 205);  
+  }   

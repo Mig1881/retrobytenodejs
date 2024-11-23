@@ -1,18 +1,42 @@
 import axios from 'axios';
+import { el, icon, td } from './documentUtil';
+import { notifyOk } from './dialogUtil';
 
 window.readProducts = function() {
     axios.get('http://localhost:8081/products')
         .then((response) => {
             const productList = response.data;
-            const productUl = document.getElementById('products');
-
+            const productTable = el('tableBody');
+            
             productList.forEach(product => {
-                const li = document.createElement('li');
-                li.appendChild(document.createTextNode(product.product_name + ' (' + product.release_date + ') ' + product.sale_price));
-                productUl.appendChild(li);
+                const row = document.createElement('tr');
+                row.id = 'product-' + product.id_product;
+                row.innerHTML = td(product.product_name) +
+                                td(product.description) +
+                                td(product.sale_price) +
+                                '&nbsp;&nbsp;<a class="btn btn-warning" href="modify.html">' +
+                                icon('edit') + 
+                                '</a>&nbsp; ' +
+                                '<a class="btn btn-danger" href="javascript:removeProduct(' + product.id_product + ')">' +
+                                icon('delete') +
+                                '</a>' +
+                                '&nbsp;&nbsp;<a class="btn btn-info" href="#">' +
+                                icon('view');
+                productTable.appendChild(row);
             })
+            
         });
-    //con esto compruebo que se llama a la funcion y que todo esta bien linkado, es una traza
-    // const pantalla= document.querySelector('.pantalla')
-    // pantalla.textContent = 'Se esta ejecutando';
-}
+    
+};
+
+window.removeProduct = function(id_product) {
+    if (confirm('¿Está seguro de que desea eliminar este producto?')) {
+        axios.delete('http://localhost:8081/products/' + id_product)
+            .then((response) => {
+                if (response.status == 204) {
+                    notifyOk('Producto eliminado correctamente');
+                    el('product-' + id_product).remove();
+                }
+            });
+    }
+};
