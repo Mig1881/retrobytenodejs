@@ -1,11 +1,11 @@
 {
-    "name": "movies",
+    "name": "products",
     "version": "0.1",
-    "description": "Movies application",
+    "description": "Retrobyte application",
     "scripts": {
       "start": "node src/app.js"
     },
-    "author": "Santiago Faci",
+    "author": "Miguel Angel Rubio",
     "license": "GPL-2.0-only",
 
     "dependencies": {

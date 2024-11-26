@@ -20,7 +20,7 @@ window.readProducts = function() {
                                 '<a class="btn btn-danger" href="javascript:removeProduct(' + product.id_product + ')">' +
                                 icon('delete') +
                                 '</a>' +
-                                '&nbsp;&nbsp;<a class="btn btn-info" href="#">' +
+                                '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html">' +
                                 icon('view');
                 productTable.appendChild(row);
             })
