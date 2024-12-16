@@ -40,6 +40,8 @@ app.get('/products', async (req, res) => {
 //el status 200, es decir todo correcto y por otro el fichero jason con todos los datos    
 });
 //Nota con el first, lo que me aseguro es que devuelve un listado con una peli unicamente
+
+// Productos CRUD
 app.get('/products/:id_product', async (req, res) => {
     const product = await db('products').select('*').where({ id_product: req.params.id_product }).first();
     res.status(200).json(product);
@@ -86,6 +88,56 @@ app.delete('/products/:id_product', async (req, res) => {
 });
 
 
+//Proveedores CRUD
+app.get('/suppliers', async (req, res) => {
+    const suppliers = await db('suppliers').select('*');
+    res.status(200).json(suppliers);
+//esto ultimo devuelve una doble informacion al mismo tiempo, por un lado
+//el status 200, es decir todo correcto y por otro el fichero jason con todos los datos    
+});
+
+app.get('/suppliers/:id_supplier', async (req, res) => {
+    const supplier = await db('suppliers').select('*').where({ id_supplier: req.params.id_supplier }).first();
+    res.status(200).json(supplier);
+});
+
+app.delete('/suppliers/:id_supplier', async (req, res) => {
+
+    const idSupplier = req.params.id_supplier;
+    await db('suppliers').del().where({id_supplier: idSupplier});
+
+    res.status(204).json({})
+});
+
+app.post('/suppliers', async (req, res) => {
+    await db('suppliers').insert({
+        name: req.body.name,
+        tel: req.body.tel,
+        address: req.body.address,
+        zip_code: req.body.zip_code,
+        city : req.body.city,
+        country: req.body.country,
+        website: req.body.website,
+        email: req.body.email
+    });
+
+    res.status(201).json({});
+});
+
+app.put('/suppliers/:id_supplier', async (req, res) => {
+    await db('suppliers').where({ id_supplier: req.params.id_supplier }).update({
+        name: req.body.name,
+        tel: req.body.tel,
+        address: req.body.address,
+        zip_code: req.body.zip_code,
+        city : req.body.city,
+        country: req.body.country,
+        website: req.body.website,
+        email: req.body.email
+    });
+
+    res.status(204).json({});
+});
 
 app.listen(8081, () => {
     console.log('El backend ha iniciado en el puerto 8081');

@@ -5,7 +5,11 @@
         "src/index.html",
         "src/register.html",
         "src/viewproduct.html",
-        "src/modify.html"],
+        "src/modify.html",
+        "src/indexSupplier.html",
+        "src/registerSupplier.html",
+        "src/viewsupplier.html",
+        "src/modifySupplier.html"],
 
     "type": "module",
     "scripts": {
