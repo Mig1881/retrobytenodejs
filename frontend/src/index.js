@@ -14,13 +14,13 @@ window.readProducts = function() {
                 row.innerHTML = td(product.product_name) +
                                 td(product.description) +
                                 td(product.sale_price) +
-                                '&nbsp;&nbsp;<a class="btn btn-warning" href="modify.html">' +
+                                '&nbsp;&nbsp;<a class="btn btn-warning" href="modify.html?id_product=' + product.id_product + '">' +
                                 icon('edit') + 
                                 '</a>&nbsp; ' +
                                 '<a class="btn btn-danger" href="javascript:removeProduct(' + product.id_product + ')">' +
                                 icon('delete') +
                                 '</a>' +
-                                '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html">' +
+                                '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html?id_product=' + product.id_product + '">' +
                                 icon('view');
                 productTable.appendChild(row);
             })
@@ -28,7 +28,7 @@ window.readProducts = function() {
         });
     
 };
-
+// Esta claro que asi no se pasan los codigos( clave = valor???)
 window.removeProduct = function(id_product) {
     if (confirm('¿Está seguro de que desea eliminar este producto?')) {
         axios.delete('http://localhost:8081/products/' + id_product)
@@ -36,6 +36,8 @@ window.removeProduct = function(id_product) {
                 if (response.status == 204) {
                     notifyOk('Producto eliminado correctamente');
                     el('product-' + id_product).remove();
+                } else {
+                    notifyError('Error en la eliminacion del producto, producto no eliminado');
                 }
             });
     }

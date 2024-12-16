@@ -28,6 +28,31 @@ window.addProduct = function() {
         return;
     }
 
+    if (stock_units === '') {
+        notifyError('El unidades en stock es un campo obligatorio');
+        return;
+    }
+
+    if (image === '') {
+        notifyError('Imagen es un campo obligatorio');
+        return;
+    }
+
+    if (release_date === '') {
+        notifyError('Fecha de lanzamiento es un campo obligatorio');
+        return;
+    }
+
+    if (product_status === '') {
+        notifyError('Estado del producto es un campo obligatorio');
+        return;
+    }
+
+    if (id_supplier === '') {
+        notifyError('Codigo proveedor es un campo obligatorio');
+        return;
+    }
+
 
 
     axios.post('http://localhost:8081/products', {
@@ -41,10 +66,16 @@ window.addProduct = function() {
         id_supplier: id_supplier
     });
 
-    // TODO Confirmar al usuario que todo ha ido bien (o mal)
-    notifyOk('Pelicula registrada');
+    // TODO Confirmar al usuario que todo ha ido bien (o mal), falra comprobar el codigo de
+    // de respuesta del servidor y en tonces se saca el mensaje
+    //if (response.status == 201) {
+        notifyOk('Producto registrado');
+    //} else {
+    //    notifyError('Error en el registro del producto, producto no registrado');
+    //};
+    
 
-    // TODO Limpiar el formulario
+    //Limpiar el formulario
     el('product_name').value = '';
     el('description').value = '';
     el('sale_price').value = '';
