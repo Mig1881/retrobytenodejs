@@ -1,9 +1,26 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
+import { el, td } from './documentUtil.js';
 
-
+var arrayIdsupplier = [];
 
 window.loadProduct = function() {
+    //leo suppliers para comprobacion de codigo de supplier
+    axios.get('http://localhost:8081/suppliers')
+    .then((response) => {
+        const supplierList = response.data;
+        const supplierTable = el('tableBody');
+        
+        supplierList.forEach(supplier => {
+            const row = document.createElement('tr');
+            row.innerHTML = td(supplier.id_supplier) +
+                            td(supplier.name); 
+            supplierTable.appendChild(row);
+            arrayIdsupplier.push(supplier.id_supplier);
+        })
+        
+    });
+
     const queryParams = new URLSearchParams(window.location.search);
     const productId = queryParams.get('id_product');
     axios.get('http://localhost:8081/products/' + productId)
@@ -14,8 +31,6 @@ window.loadProduct = function() {
             document.getElementById('sale_price').value = product.sale_price;
             document.getElementById('stock_units').value = product.stock_units;
             document.getElementById('image').value = product.image;
-            // Doy formato a la fecha mediante una funcion  
-            //fechaFormateada = formatearFecha(product.release_date);
             document.getElementById('release_date').value = product.release_date;
             document.getElementById('product_status').value = product.product_status;
             document.getElementById('id_supplier').value = product.id_supplier;
@@ -71,9 +86,20 @@ window.loadProduct = function() {
                 return;
             }
         
-            if (id_supplier === '') {
-                notifyError('Codigo proveedor es un campo obligatorio');
-                return;
+            if (id_supplier !== '') {
+                    let igualTest = false;
+                    for (let idAux of arrayIdsupplier) {
+                        if (idAux == id_supplier){
+                            igualTest = true;
+                       }
+                    }
+                    if (!igualTest){
+                        notifyError('Codigo proveedor no encontrado');
+                        return;
+                    }
+            } else {
+                    notifyError('Codigo proveedor es un campo obligatorio');
+                    return;
             }
 
             const queryParams = new URLSearchParams(window.location.search);
@@ -89,16 +115,16 @@ window.loadProduct = function() {
                 release_date: release_date,
                 product_status: product_status,
                 id_supplier: id_supplier
+            })
+            .then((response) => {
+                // Confirmar al usuario que todo ha ido bien (o mal)
+                if (response.status == 204) {
+                    notifyOk('Producto Modificado');
+                } else {
+                    notifyError('Error en la modificacion del producto, producto no modificado');
+                }
             });
 
-            // TODO Confirmar al usuario que todo ha ido bien (o mal), falra comprobar el codigo de
-            // de respuesta del servidor y en tonces se saca el mensaje
-            
-            //if (response.status == 204) {
-                notifyOk('Producto Modificado');
-            //} else {
-            //    notifyError('Error en la modificacion del producto, producto no modificado');
-            //}
         };
 
        

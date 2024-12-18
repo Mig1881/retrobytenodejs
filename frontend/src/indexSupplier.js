@@ -30,7 +30,7 @@ window.readSuppliers = function() {
 };
 // 
 window.removeSupplier = function(id_supplier) {
-    if (confirm('¿Está seguro de que desea eliminar este producto?')) {
+    if (confirm('¿Está seguro de que desea eliminar este proveedor?')) {
         axios.delete('http://localhost:8081/suppliers/' + id_supplier)
             .then((response) => {
                 if (response.status == 204) {

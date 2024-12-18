@@ -84,16 +84,15 @@ window.loadSupplier = function() {
                  website: website,
                  email: email
                  
-             });
-
-            // if (response.status == 204) {
-                notifyOk('Proveedor Modificado');
-            //} else {
-            //    notifyError('Error en la modificacion del proveedor, proveedor no modificado');
-            //}
-            // TODO Confirmar al usuario que todo ha ido bien (o mal), falra comprobar el codigo de
-            // de respuesta del servidor y en tonces se saca el mensaje
-           
+             })
+             .then((response) => {
+                // Confirmar al usuario que todo ha ido bien (o mal)
+                if (response.status == 204) {
+                    notifyOk('Proveedor Modificado');
+                } else {
+                    notifyError('Error en la modificacion del proveedor, proveedor no modificado');
+                }
+            });
 
            
         };

@@ -1,8 +1,32 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el } from './documentUtil.js';
+import { el, td } from './documentUtil.js';
+
+var arrayIdsupplier = [];
+
+window.readCodeSuppliers = function() {
+    axios.get('http://localhost:8081/suppliers')
+    .then((response) => {
+        const supplierList = response.data;
+        const supplierTable = el('tableBody');
+        
+        supplierList.forEach(supplier => {
+            const row = document.createElement('tr');
+            row.innerHTML = td(supplier.id_supplier) +
+                            td(supplier.name); 
+            supplierTable.appendChild(row);
+            arrayIdsupplier.push(supplier.id_supplier);
+        })
+        
+    });
+
+}
+
+
 
 window.addProduct = function() {
+
+
     const product_name = document.getElementById('product_name').value;
     const description = document.getElementById('description').value;
     const sale_price = document.getElementById('sale_price').value;
@@ -48,10 +72,22 @@ window.addProduct = function() {
         return;
     }
 
-    if (id_supplier === '') {
+    if (id_supplier !== '') {
+        let igualTest = false;
+        for (let idAux of arrayIdsupplier) {
+            if (idAux == id_supplier){
+                igualTest = true;
+           }
+        }
+        if (!igualTest){
+            notifyError('Codigo proveedor no encontrado');
+            return;
+        }
+    } else {
         notifyError('Codigo proveedor es un campo obligatorio');
         return;
     }
+
 
 
 
@@ -64,16 +100,15 @@ window.addProduct = function() {
         release_date: release_date,
         product_status: product_status,
         id_supplier: id_supplier
+    })
+    .then((response) => {
+        // Confirmar al usuario que todo ha ido bien (o mal)
+        if (response.status == 201) {
+            notifyOk('Producto Registrado');
+        } else {
+            notifyError('Error en el registro del producto, producto no registrado');
+        }
     });
-
-    // TODO Confirmar al usuario que todo ha ido bien (o mal), falra comprobar el codigo de
-    // de respuesta del servidor y en tonces se saca el mensaje
-    //if (response.status == 201) {
-        notifyOk('Producto registrado');
-    //} else {
-    //    notifyError('Error en el registro del producto, producto no registrado');
-    //};
-    
 
     //Limpiar el formulario
     el('product_name').value = '';

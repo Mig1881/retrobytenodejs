@@ -64,16 +64,16 @@ window.addSupplier = function() {
         country: country,
         website: website,
         email: email
+    })
+    .then((response) => {
+        // Confirmar al usuario que todo ha ido bien (o mal)
+        if (response.status == 201) {
+            notifyOk('Proveedor Registrado');
+        } else {
+            notifyError('Error en el registro del proveedor, proveedor no registrado');
+        }
     });
 
-    // TODO Confirmar al usuario que todo ha ido bien (o mal), falra comprobar el codigo de
-    // de respuesta del servidor y en tonces se saca el mensaje
-    notifyOk('Proveedor registrado');
-    //if (response.status == 201) {
-    //    notifyOk('Proveedor registrado');
-    //} else {
-    //    notifyError('Error en el registro del proveedor, proveedor no registrado');
-    //};
 
     //Limpiar el formulario
     el('name').value = '';
