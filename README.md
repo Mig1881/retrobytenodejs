@@ -1,7 +1,6 @@
 Retobyte - Aplicacion Web -
 
-Retrobye es la primera version de un apagina funcional de compra - venta - reparaciones
-- restauraciones de ordenadores y microordenadores retro, aceptando articulos de todas 
+Retrobye es la primera version de una pagina funcional de compra - venta - reparaciones de ordenadores y microordenadores retro, aceptando articulos de todas 
 las epocas.
 En la version 1.0 solo esta implementado el control de usuarios y la lista de productos a 
 la venta, asi como el accesso al administrador de la pagina para que pueda tener acceso al 
