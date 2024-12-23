@@ -2,6 +2,7 @@ import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
 import { el, td } from './documentUtil.js';
 
+
 var arrayIdsupplier = [];
 
 window.readCodeSuppliers = function() {
@@ -26,7 +27,7 @@ window.readCodeSuppliers = function() {
 
 window.addProduct = function() {
 
-
+    let imageAux='no_image.jpeg';
     const product_name = document.getElementById('product_name').value;
     const description = document.getElementById('description').value;
     const sale_price = document.getElementById('sale_price').value;
@@ -57,11 +58,6 @@ window.addProduct = function() {
         return;
     }
 
-    if (image === '') {
-        notifyError('Imagen es un campo obligatorio');
-        return;
-    }
-
     if (release_date === '') {
         notifyError('Fecha de lanzamiento es un campo obligatorio');
         return;
@@ -89,27 +85,51 @@ window.addProduct = function() {
     }
 
 
+    if (image === '') {
+        notifyError('Imagen es un campo obligatorio');
+        return;
+    } else {
+        const imageFile = el('image').files[0];
+    
+         // Prepara los datos del formulario para ser enviados al backend
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        
+        axios.post('http://localhost:8081/images', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'   
+             }
+            }).then((response) => {
+                notifyOk('Los datos de imagen se han registrado correctamente');
+                
+                imageAux = response.data;
+                //Nombre de la imagen del producto afectado
+                axios.post('http://localhost:8081/products', {
+                    product_name: product_name,
+                    description: description,
+                    sale_price: sale_price,
+                    stock_units: stock_units,
+                    image: imageAux,
+                    release_date: release_date,
+                    product_status: product_status,
+                    id_supplier: id_supplier
+                })
+                .then((response) => {
+                    // Confirmar al usuario que todo ha ido bien (o mal)
+                    if (response.status == 201) {
+                        notifyOk('Producto Registrado');
+                    } else {
+                        notifyError('Error en el registro del producto, producto no registrado');
+                    }
+                });
 
+            }).catch((error) => {
+                notifyError('Se ha producido un error al enviar los datos de imagen');
+                console.log(error);
+            });
 
-    axios.post('http://localhost:8081/products', {
-        product_name: product_name,
-        description: description,
-        sale_price: sale_price,
-        stock_units: stock_units,
-        image: image,
-        release_date: release_date,
-        product_status: product_status,
-        id_supplier: id_supplier
-    })
-    .then((response) => {
-        // Confirmar al usuario que todo ha ido bien (o mal)
-        if (response.status == 201) {
-            notifyOk('Producto Registrado');
-        } else {
-            notifyError('Error en el registro del producto, producto no registrado');
-        }
-    });
-
+    }
+    
     //Limpiar el formulario
     el('product_name').value = '';
     el('description').value = '';

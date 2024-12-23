@@ -2,11 +2,15 @@
 const express = require('express');
 const cors = require('cors');
 const knex = require('knex');
+const multer = require('multer');
 
 //*** INICIO DE LA APLICACION */
+const IMAGES_PATH = './images/';
 const app = express();
 app.use(cors());
 app.use(express.json());
+// La carpeta de las imágenes se sirve estáticamente (http://localhost:8081/xxxxxxxx.jpg)
+app.use(express.static(IMAGES_PATH))
 
 //*** INICIO DE LA BASE DE DATOS */
 const db = knex({
@@ -16,20 +20,19 @@ const db = knex({
     },
     useNullAsDefault: true
 });
+// defininimos un nombre del fichero unico para guardarlo en images, para evitar conflictos
+// entre las imagenes que puedan subir lo s usuarios 
+const multerStorage = multer.diskStorage({
+    destination: IMAGES_PATH,
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1000);
+        const extension = file.mimetype.slice(file.mimetype.indexOf('/') + 1);
+        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + extension);
+    }
+});
+const upload = multer({storage: multerStorage});
 
-
-//*******DEFINICION DE OPERACIONES DE LA BD CRUD*********** 
-//*
-// Campos de la tabla products
-//  id_product int PRIMARY KEY AUTO_INCREMENT,
-// 	product_name varchar(50),
-// 	description varchar(150),
-// 	sale_price decimal(9,2),
-// 	stock_units int default 1,
-// 	image varchar(40),
-// 	release_date date,
-// 	product_status varchar(100),
-// 	id_supplier int
+// Productos CRUD
 //*
 // atencion, siempre todas los registros van por defecto, lo que no va por defecto son los campos
 //si pongo * van todos los campos de cada registro
@@ -39,12 +42,12 @@ app.get('/products', async (req, res) => {
 //esto ultimo devuelve una doble informacion al mismo tiempo, por un lado
 //el status 200, es decir todo correcto y por otro el fichero jason con todos los datos    
 });
-//Nota con el first, lo que me aseguro es que devuelve un listado con una peli unicamente
 
-// Productos CRUD
+
 app.get('/products/:id_product', async (req, res) => {
     const product = await db('products').select('*').where({ id_product: req.params.id_product }).first();
     res.status(200).json(product);
+//Nota con el first, lo que me aseguro es que devuelve un listado con un producto unicamente
 });
 
 app.post('/products', async (req, res) => {
@@ -58,10 +61,9 @@ app.post('/products', async (req, res) => {
         product_status: req.body.product_status,
         id_supplier: req.body.id_supplier
     });
-
-    res.status(201).json({});
+    res.status(201).json();
 });
-// ojo, no pongo el id_product para modificar, es la clave
+// Atencion, no pongo el id_product para modificar, es la clave
 app.put('/products/:id_product', async (req, res) => {
      await db('products').where({ id_product: req.params.id_product }).update({
         product_name: req.body.product_name,
@@ -77,8 +79,8 @@ app.put('/products/:id_product', async (req, res) => {
      res.status(204).json({});
 });
 
-//NO ENTIENDO PORQUE AQUI HAY QUE DEFINIR UNA CONSTANTE, PREGUNTAR SANTI SI NO LO EXPLICA EL
-//Creo que daria exactamente lo mismo
+
+//Delete
 app.delete('/products/:id_product', async (req, res) => {
 
         const idProduct = req.params.id_product;
@@ -87,13 +89,21 @@ app.delete('/products/:id_product', async (req, res) => {
         res.status(204).json({})
 });
 
+// Subida al servidor de las imagenes
+app.post('/images', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({
+            message: 'No image provided'
+        });
+    }
+    let nombreFicheroAux = req.file.filename;
+    return res.json(nombreFicheroAux);
+});
 
 //Proveedores CRUD
 app.get('/suppliers', async (req, res) => {
     const suppliers = await db('suppliers').select('*');
-    res.status(200).json(suppliers);
-//esto ultimo devuelve una doble informacion al mismo tiempo, por un lado
-//el status 200, es decir todo correcto y por otro el fichero jason con todos los datos    
+    res.status(200).json(suppliers);    
 });
 
 app.get('/suppliers/:id_supplier', async (req, res) => {
@@ -139,6 +149,7 @@ app.put('/suppliers/:id_supplier', async (req, res) => {
     res.status(204).json({});
 });
 
+// Mensaje de inicio del Backend
 app.listen(8081, () => {
     console.log('El backend ha iniciado en el puerto 8081');
 });
