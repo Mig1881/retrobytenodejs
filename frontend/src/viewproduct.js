@@ -45,8 +45,10 @@ window.viewProduct = function() {
     axios.get('http://localhost:8081/products/' + productId)
         .then((response) => {
             const product = response.data;
+            const nameImage = el('srcImage');
             const productTable = el('tableBodyView');
-    
+            //Contruimos primero la linea de imagen
+            nameImage.innerHTML += '<img src="http://localhost:8081/' +  product.image + '" + alt="'+product.image+'"+ width="100%"/>';
             const row = document.createElement('tr');
             row.innerHTML = '<td>Product Name: </td>' +
                             td(product.product_name);

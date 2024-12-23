@@ -30,10 +30,10 @@ window.loadProduct = function() {
             document.getElementById('description').value= product.description;
             document.getElementById('sale_price').value = product.sale_price;
             document.getElementById('stock_units').value = product.stock_units;
-            document.getElementById('image').value = product.image;
             document.getElementById('release_date').value = product.release_date;
             document.getElementById('product_status').value = product.product_status;
             document.getElementById('id_supplier').value = product.id_supplier;
+            // document.getElementById('image').value = product.image;
 
                                 
            
@@ -45,10 +45,10 @@ window.loadProduct = function() {
             const description = document.getElementById('description').value;
             const sale_price = document.getElementById('sale_price').value;
             const stock_units = document.getElementById('stock_units').value;
-            const image = document.getElementById('image').value;
             const release_date = document.getElementById('release_date').value;
             const product_status = document.getElementById('product_status').value;
             const id_supplier = document.getElementById('id_supplier').value;
+            const image = document.getElementById('image').value;
 
             //Validación de datos
             if (product_name === '') {
@@ -68,11 +68,6 @@ window.loadProduct = function() {
 
             if (stock_units === '') {
                 notifyError('El unidades en stock es un campo obligatorio');
-                return;
-            }
-        
-            if (image === '') {
-                notifyError('Imagen es un campo obligatorio');
                 return;
             }
         
@@ -102,28 +97,57 @@ window.loadProduct = function() {
                     return;
             }
 
-            const queryParams = new URLSearchParams(window.location.search);
-            const productId = queryParams.get('id_product');
+            if (image === '') {
+                notifyError('Imagen es un campo obligatorio');
+                return;
+            } else {
+                const imageFile = el('image').files[0];
+            
+                 // Prepara los datos del formulario para ser enviados al backend
+                const formData = new FormData();
+                formData.append('image', imageFile);
+                
+                axios.post('http://localhost:8081/images', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'   
+                     }
+                    }).then((response) => {
+                        notifyOk('Los datos de imagen se han registrado correctamente');
+                        
+                        imageAux = response.data;
+                        //Nombre de la imagen del producto afectado
+                        const queryParams = new URLSearchParams(window.location.search);
+                        const productId = queryParams.get('id_product');
 
 
-            axios.put('http://localhost:8081/products/' + productId, {
-                product_name: product_name,
-                description: description,
-                sale_price: sale_price,
-                stock_units: stock_units,
-                image: image,
-                release_date: release_date,
-                product_status: product_status,
-                id_supplier: id_supplier
-            })
-            .then((response) => {
-                // Confirmar al usuario que todo ha ido bien (o mal)
-                if (response.status == 204) {
-                    notifyOk('Producto Modificado');
-                } else {
-                    notifyError('Error en la modificacion del producto, producto no modificado');
-                }
-            });
+                        axios.put('http://localhost:8081/products/' + productId, {
+                            product_name: product_name,
+                            description: description,
+                            sale_price: sale_price,
+                            stock_units: stock_units,
+                            image: imageAux,
+                            release_date: release_date,
+                            product_status: product_status,
+                            id_supplier: id_supplier
+                        })
+                        .then((response) => {
+                            // Confirmar al usuario que todo ha ido bien (o mal)
+                            if (response.status == 204) {
+                                notifyOk('Producto Modificado');
+                            } else {
+                                notifyError('Error en la modificacion del producto, producto no modificado');
+                            }
+                        });
+        
+                        }).catch((error) => {
+                            notifyError('Se ha producido un error al enviar los datos de imagen');
+                            console.log(error);
+                        });
+        
+            }
+
+
+            
 
         };
 
