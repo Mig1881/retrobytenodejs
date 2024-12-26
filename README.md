@@ -138,7 +138,11 @@ INSERT INTO PRODUCTS(product_name,description,sale_price,stock_units,image,relea
 
 IMPORTANTE:
 ==========
-las imagenes hay que crear una carpeta /IMAGES en el backend, para recoger las fotos subidas al servidor
+1. las imagenes se suben a la carpeta /IMAGES en el backend, viene inicialmente creada y viene con la imagen no_image.jpg para que se puedan
+   visualizar directamente los registros que acabamos de poner.
+2. Hay una colección de HOPPSCOTCH con el CRUD completo de las tres tablas(USERS, SUPPLIERS, PRODUCTS) ESTA EN EL BACKEND Y SE LLAMA coleccion_hoppscotch_bd.json
+   
+   
         
 
 Se ha utilizado como base para el servidor NodeJS y Express, luego hemos ido implementado unas librerias
