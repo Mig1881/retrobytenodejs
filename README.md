@@ -114,7 +114,7 @@ Dejamos unos registros iniciales para que se puedan empezar a operar.
 	
 
 // Inserts de la tabla Products
-// Nota el formato de fecha date standard pasa de '01/02/1982' de Oracle a '1982-02-01' en mysql
+
 
 INSERT INTO PRODUCTS(product_name,description,sale_price,stock_units,image,release_date,product_status,id_supplier)
     VALUES('Commodore 64','Micrordenador de 8 bits de los 80, el micrordenado mas vendido en el mundo',180.50,1,'no_image.jpg',   
@@ -143,8 +143,6 @@ IMPORTANTE:
 2. Hay una colección de HOPPSCOTCH con el CRUD completo de las tres tablas(USERS, SUPPLIERS, PRODUCTS) ESTA EN EL BACKEND Y SE LLAMA coleccion_hoppscotch_bd.json
    
    
-        
-
 Se ha utilizado como base para el servidor NodeJS y Express, luego hemos ido implementado unas librerias
 muy conocidas como son cors, multer, sqlite3, knex en el backend y axios toastify-js en el frontend.
 El aplicativo tiene un total de XX htmls, los cuales vienen referenciadas en el fichero pacjage.json del
