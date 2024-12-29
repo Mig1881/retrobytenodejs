@@ -149,6 +149,58 @@ app.put('/suppliers/:id_supplier', async (req, res) => {
     res.status(204).json({});
 });
 
+//Users CRUD
+app.get('/users', async (req, res) => {
+    const users = await db('users').select('*');
+    res.status(200).json(users);    
+});
+
+app.get('/users/:username', async (req, res) => {
+    const user = await db('users').select('*').where({ username: req.params.username }).first();
+    res.status(200).json(user);
+});
+
+
+app.delete('/users/:id_user', async (req, res) => {
+
+    const idUser = req.params.id_user;
+    await db('users').del().where({id_user: idUser});
+
+    res.status(204).json({})
+});
+
+app.post('/users', async (req, res) => {
+    await db('users').insert({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        role: req.body.role,
+        tel: req.body.tel,
+        address: req.body.address,
+        zip_code: req.body.zip_code,
+        city: req.body.city,
+        country: req.body.country
+    });
+
+    res.status(201).json({});
+});
+
+app.put('/users/:id_user', async (req, res) => {
+    await db('users').where({ id_user: req.params.id_user }).update({
+        name: req.body.name,
+        username: req.body.username,
+        password: req.body.password,
+        role: req.body.role,
+        tel: req.body.tel,
+        address: req.body.address,
+        zip_code: req.body.zip_code,
+        city: req.body.city,
+        country: req.body.country
+    });
+
+    res.status(204).json({});
+});
+
 // Mensaje de inicio del Backend
 app.listen(8081, () => {
     console.log('El backend ha iniciado en el puerto 8081');
