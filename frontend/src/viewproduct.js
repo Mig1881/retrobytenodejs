@@ -45,10 +45,20 @@ window.viewProduct = function() {
     axios.get('http://localhost:8081/products/' + productId)
         .then((response) => {
             const product = response.data;
-            const nameImage = el('srcImage');
-            const productTable = el('tableBodyView');
             //Contruimos primero la linea de imagen
+            const nameImage = el('srcImage');
             nameImage.innerHTML += '<img src="http://localhost:8081/' +  product.image + '" + alt="'+product.image+'"+ width="100%"/>';
+            
+            // Boton de compra segun rol
+            const salesButton = el('salesButton');
+            let roleSession = sessionStorage.getItem("role");
+            if ((roleSession == 'admin' || roleSession == 'user')) {
+                salesButton.innerHTML += '<a href="sales.html" type="button" class="btn btn-sm btn-outline-danger"><strong>Comprar</strong></a>';
+            } else {
+                salesButton.innerHTML += '<a href="#" type="button" class="btn btn-sm btn-outline-danger"><strong>Iniciar Sesion para COMPRAR</strong></a>';
+            }
+            // construccion de la tabla
+            const productTable = el('tableBodyView');
             const row = document.createElement('tr');
             row.innerHTML = '<td>Product Name: </td>' +
                             td(product.product_name);
