@@ -24,7 +24,7 @@ IMPORTANTE:
    
 Se ha utilizado como base para el servidor NodeJS y Express, luego hemos ido implementado unas librerias
 muy conocidas como son cors, multer, sqlite3, knex en el backend y axios toastify-js en el frontend.
-El aplicativo tiene un total de XX htmls, los cuales vienen referenciadas en el fichero pacjage.json del
+El aplicativo tiene un total de 14 htmls, los cuales vienen referenciadas en el fichero pacjage.json del
 frontend.
 
 Para iniciar la aplicacion, una vez creada la BD y rellenada con la muestra de registros, hay que instalar la librerias tanto en el backend
