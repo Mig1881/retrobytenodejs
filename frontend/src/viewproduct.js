@@ -80,26 +80,30 @@ window.viewProduct = function() {
                             td(product.sale_price);
             productTable.appendChild(row4);
             const row5 = document.createElement('tr');
-            row5.innerHTML = '<td>Stock Units: </td>' +
-                            td(product.stock_units);
-            productTable.appendChild(row5);
-            // Relaciones de las dos tablas Products y Suppliers
-            axios.get('http://localhost:8081/suppliers/' + product.id_supplier)
-            .then((response) => {
-                const supplier = response.data;
-                const row6 = document.createElement('tr');
-                row6.innerHTML = '<td>Name Supplier: </td>' +
-                                td(supplier.name);
-                productTable.appendChild(row6);
-                const row7 = document.createElement('tr');
-                row7.innerHTML = '<td>City: </td>' +
-                                td(supplier.city);
-                productTable.appendChild(row7);
-                const row8 = document.createElement('tr');
-                row8.innerHTML = '<td>Email: </td>' +
-                                td(supplier.email);
-                productTable.appendChild(row8);
-            })
+            // Solo puede ver los datos de unidades de stock y proveedor si es administrador
+            if ((roleSession == 'admin')) {
+                
+                row5.innerHTML = '<td>Stock Units: </td>' +
+                                td(product.stock_units);
+                productTable.appendChild(row5);
+                // Relaciones de las dos tablas Products y Suppliers
+                axios.get('http://localhost:8081/suppliers/' + product.id_supplier)
+                .then((response) => {
+                    const supplier = response.data;
+                    const row6 = document.createElement('tr');
+                    row6.innerHTML = '<td>Name Supplier: </td>' +
+                                    td(supplier.name);
+                    productTable.appendChild(row6);
+                    const row7 = document.createElement('tr');
+                    row7.innerHTML = '<td>City: </td>' +
+                                    td(supplier.city);
+                    productTable.appendChild(row7);
+                    const row8 = document.createElement('tr');
+                    row8.innerHTML = '<td>Email: </td>' +
+                                    td(supplier.email);
+                    productTable.appendChild(row8);
+                })
+            }    
 
         });
 };
