@@ -15,17 +15,6 @@ Para ello se ha cosnstruido la base de datos con SQLite. Recomendamos el uso de 
 La base de datos hay que crearla y alojarla fisicamente en el Backend de la carpeta del proyecto retrobytenodejs, se tiene que llamar:
 retrocomputers.db
 
-INSTALACION DE LA APLICACION
-============================
-
-Se realiza un git Clone https://github.com/Mig1881/retrobytenodejs 
-Se accede a la carpeta recien creada
-cd retrobytenodejs
-
-La base de datos hay que crearla y alojarla fisicamente en el Backend de la carpeta del proyecto retrobytenodejs, se tiene que llamar:
-
-retrocomputers.db
-
 IMPORTANTE:
 ==========
 1. las imagenes se suben a la carpeta /IMAGES en el backend, viene inicialmente creada y viene con la imagen no_image.jpg para que se puedan
