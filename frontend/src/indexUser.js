@@ -34,7 +34,7 @@ window.removeUser = function(id_user) {
         axios.delete('http://localhost:8081/users/' + id_user)
             .then((response) => {
                 if (response.status == 204) {
-                    notifyOk('User eliminado correctamente');
+                    notifyOk('Usuario eliminado correctamente');
                     el('user-' + id_user).remove();
                 } else {
                     notifyError('Error en la eliminacion del usuario, usuario no eliminado');

@@ -53,7 +53,7 @@ window.viewProduct = function() {
             const salesButton = el('salesButton');
             let roleSession = sessionStorage.getItem("role");
             if ((roleSession == 'admin' || roleSession == 'user')) {
-                salesButton.innerHTML += '<a href="sales.html" type="button" class="btn btn-sm btn-outline-danger"><strong>Comprar</strong></a>';
+                salesButton.innerHTML += '<a href="sales.html" type="button" class="btn btn-sm px-5 py-1 btn-outline-danger"><strong>Comprar</strong></a>';
             } else {
                 salesButton.innerHTML += '<a href="#" type="button" class="btn btn-sm btn-outline-danger"><strong>Iniciar Sesion para COMPRAR</strong></a>';
             }

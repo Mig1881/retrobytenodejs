@@ -7,6 +7,7 @@ window.readProducts = function() {
     let roleSession = sessionStorage.getItem("role");
     const usernameDisplay = el('userJs');
     const rolDisplay = el('rolJs');
+    const logoutDisplay = el('logout');
     if (usernameSession == null) {
         usernameDisplay.innerHTML += 'no user';
     } else {
@@ -43,20 +44,27 @@ window.readProducts = function() {
             document.getElementById("menuUser").parentElement.appendChild(adminHTMLElement03);
         } else {
             //Elemento4 pestaña de Modificacion datos del usuario no admin
-            let adminHTMLElement04 = document.createElement('li');
-            adminHTMLElement04.classList.add("nav-item");
-            let adminHTMLElement04Interior = document.createElement('a');
-            adminHTMLElement04Interior.classList.add("nav-link");
-            adminHTMLElement04Interior.href = 'modifyUser.html';
-            let interior04 = document.createTextNode('Modificacion datos de tu Usuario');
-            adminHTMLElement04Interior.appendChild(interior04);
-            adminHTMLElement04.appendChild(adminHTMLElement04Interior);
-            document.getElementById("menuUser").parentElement.appendChild(adminHTMLElement04);
+            if (usernameSession !== "no user") {
+                let adminHTMLElement04 = document.createElement('li');
+                adminHTMLElement04.classList.add("nav-item");
+                let adminHTMLElement04Interior = document.createElement('a');
+                adminHTMLElement04Interior.classList.add("nav-link");
+                adminHTMLElement04Interior.href = 'modifyUser.html';
+                let interior04 = document.createTextNode('Modificacion datos de tu Usuario');
+                adminHTMLElement04Interior.appendChild(interior04);
+                adminHTMLElement04.appendChild(adminHTMLElement04Interior);
+                document.getElementById("menuUser").parentElement.appendChild(adminHTMLElement04);
+            }
 
         }
-         // Displayamos el usuario activo    
-         usernameDisplay.innerHTML += usernameSession;
-         rolDisplay.innerHTML += roleSession;
+         // Displayamos el usuario activo 
+         if (usernameSession !== "no user") {
+            logoutDisplay.innerHTML +=  '<a class="signin-line"  href="javascript:logoutApp()"> Logout</a>';
+            usernameDisplay.innerHTML += usernameSession;
+            rolDisplay.innerHTML += roleSession;
+         } else {
+            usernameDisplay.innerHTML += 'no user';
+         }
     };
 
     axios.get('http://localhost:8081/products')
@@ -109,4 +117,11 @@ window.removeProduct = function(id_product) {
                 }
             });
     }
+};
+
+window.logoutApp = function() {
+    sessionStorage.setItem("username","no user");
+    sessionStorage.setItem("role","");
+    location.reload();
+    notifyOk('Sesion cerrada correctamente');
 };
