@@ -81,25 +81,7 @@ window.loadUser = function() {
             if (role === '') {
                 notifyError('Role es un campo obligatorio');
                 return;
-            } else {
-                let roleSession = sessionStorage.getItem("role");
-                if (roleSession != 'admin') {
-                    if (role == 'admin') {
-                        notifyError('Solo lo puede hacer otro admin');
-                        return;
-                    } else {
-                        if(role != 'user'){
-                            notifyError('role tiene que ser user');
-                            return; 
-                        }
-                    }
-                } else {
-                    if (!(role == 'admin' || role == 'user ')) {
-                        notifyError('role tiene que ser user o admin');
-                        return;
-                    }
-                }
-            }    
+            } 
 
             if (tel === '') {
                 notifyError('Telefono es un campo obligatorio');
@@ -131,8 +113,7 @@ window.loadUser = function() {
             // const queryParams = new URLSearchParams(window.location.search);
             // const supplierId = queryParams.get('id_supplier');
 
-
-            axios.put('http://localhost:8081/users/' + userId, {
+            axios.put('http://localhost:8081/users/' + userName, {
                  name: name,
                  password: password,
                  role: role,
