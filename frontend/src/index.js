@@ -77,28 +77,30 @@ window.readProducts = function() {
                 row.id = 'product-' + product.id_product;
                 
                 // let roleSession1 = localStorage.getItem("role");
-                if (roleSession == 'admin') {   
-                row.innerHTML = td(product.product_name) +
-                                td(product.description) +
-                                td(product.sale_price) +
-                                '&nbsp;&nbsp;<a class="btn btn-warning" href="modify.html?id_product=' + product.id_product + '">' +
-                                icon('edit') + 
-                                '</a>&nbsp; ' +
-                                '<a class="btn btn-danger" href="javascript:removeProduct(' + product.id_product + ')">' +
-                                icon('delete') +
-                                '</a>' +
-                                '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html?id_product=' + product.id_product + '">' +
-                                icon('view');
-                } else {
+                if ( product.stock_units != 0 ) {
+                    if (roleSession == 'admin') {   
                     row.innerHTML = td(product.product_name) +
-                                td(product.description) +
-                                td(product.sale_price) +
-                                '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html?id_product=' + product.id_product + '">' +
-                                icon('view') +'</a>';
+                                    td(product.description) +
+                                    td(product.sale_price) +
+                                    '&nbsp;&nbsp;<a class="btn btn-warning" href="modify.html?id_product=' + product.id_product + '">' +
+                                    icon('edit') + 
+                                    '</a>&nbsp; ' +
+                                    '<a class="btn btn-danger" href="javascript:removeProduct(' + product.id_product + ')">' +
+                                    icon('delete') +
+                                    '</a>' +
+                                    '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html?id_product=' + product.id_product + '">' +
+                                    icon('view');
+                    } else {
+                        row.innerHTML = td(product.product_name) +
+                                    td(product.description) +
+                                    td(product.sale_price) +
+                                    '&nbsp;&nbsp;<a class="btn btn-info" href="viewproduct.html?id_product=' + product.id_product + '">' +
+                                    icon('view') +'</a>';
 
 
-                }                
-                productTable.appendChild(row);
+                    }                
+                    productTable.appendChild(row);
+                }
             })
             
         });
