@@ -113,7 +113,7 @@ window.loadUser = function() {
             // const queryParams = new URLSearchParams(window.location.search);
             // const supplierId = queryParams.get('id_supplier');
 
-            axios.put('http://localhost:8081/users/' + userName, {
+            axios.put('http://localhost:8081/users/' + userId, {
                  name: name,
                  password: password,
                  role: role,

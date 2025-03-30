@@ -14,7 +14,6 @@
         "src/indexSupplier.html",
         "src/registerSupplier.html",
         "src/viewsupplier.html",
-        "src/sales.html",
         "src/modifySupplier.html"],
 
     "type": "module",
