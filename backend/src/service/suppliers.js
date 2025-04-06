@@ -1,12 +1,24 @@
 const knex = require('knex');
 
+//  const db = knex({
+//      client: 'sqlite3',
+//      connection: {
+//          filename: 'retrocomputers.db'
+//      },
+//      useNullAsDefault: true
+//  });
+
  const db = knex({
-     client: 'sqlite3',
-     connection: {
-         filename: 'retrocomputers.db'
-     },
-     useNullAsDefault: true
- });
+      client: 'mysql',
+      connection: {
+          host: '127.0.0.1',
+          port: 3306,
+          user: 'mrubio9',
+          password: 'mrubio9',
+          database: 'tiendaonlineretrov5'
+      },
+      useNullAsDefault: true
+  });
 
 // esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
 
@@ -65,22 +77,21 @@ const registerSupplier = (async (name, tel, address, zip_code, city, country, we
         country: country,
         website: website,
         email: email
-    });
-    //OJO quita el punto y coma de aqui arriba cuando todo funcione
-    // .then(async (ids) => {
-    //     productId = ids[0];
-    // });
+    })
+     .then(async (ids) => {
+         supplierId = ids[0];
+     });
 
-    // const result = {
-    //     id: productId,
-    // };
+     const result = {
+         id: supplierId,
+     };
     
-    // return result;
+     return result;
 });
 
 const modifySupplier = (async (id_supplier, name, tel, address, zip_code, city, country, website,email) => {
     // 
-    await db('suppliers').where({ id_supplier: id_supplier }).update({
+    return await db('suppliers').where({ id_supplier: id_supplier }).update({
         name: name,
         tel: tel,
         address: address,
@@ -93,7 +104,7 @@ const modifySupplier = (async (id_supplier, name, tel, address, zip_code, city, 
 });
 
 const removeSupplier = (async (id_supplier) => {
-    await db('suppliers').del().where({id_supplier: id_supplier});
+    return await db('suppliers').del().where({id_supplier: id_supplier});
 });
 
 module.exports = {

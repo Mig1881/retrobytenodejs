@@ -58,6 +58,7 @@ window.viewProduct = function() {
             } else {
                 salesButton.innerHTML += '<a href="#" type="button" class="btn btn-sm btn-outline-danger"><strong>Iniciar Sesion para COMPRAR</strong></a>';
             }
+
             // construccion de la tabla
             const productTable = el('tableBodyView');
             const row = document.createElement('tr');
@@ -69,8 +70,10 @@ window.viewProduct = function() {
                             td(product.description);
             productTable.appendChild(row1);
             const row2 = document.createElement('tr');
+            let releaseDate = new Date(product.release_date);
+            let releaseDateFormat = releaseDate.toLocaleDateString('es-ES');
             row2.innerHTML = '<td>Release date: </td>' +
-                            td(product.release_date);
+                            td(releaseDateFormat);
             productTable.appendChild(row2);
             const row3 = document.createElement('tr');
             row3.innerHTML = '<td>Product Status: </td>' +
