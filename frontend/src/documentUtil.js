@@ -33,19 +33,16 @@ const td = function(text) {
 }
 
 // parece ser que no hace falta pero puede venir bien para algo..
-// function formatearFecha(fecha) {
-//     let fecha1 = fecha.toString();
-//     let dia = fecha1.slice(0, 2); // Extrae los primeros 4 caracteres
-//     let mes = fecha1.slice(2, 4); // Extrae los siguientes 2 caracteres
-//     let anyo = fecha1.slice(4, 8); // Extrae los últimos 2 caracteres
-//     return `${anyo}-${mes}-${dia}`;
-    
-// } 
+ function formatDateMySQL(fechaMySQL) {
+    let fechaFormatoHTML = fechaMySQL.split("T")[0]; // Extrae 8 caracteres
+    return fechaFormatoHTML;   
+ } 
             
 
 
 module.exports = {
     el,
     icon,
-    td
+    td,
+    formatDateMySQL
 };

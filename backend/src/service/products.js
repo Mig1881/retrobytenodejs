@@ -13,27 +13,27 @@ const knex = require('knex');
 Esta seria la configuracion de SQLite, habria que poner su correspondiente
 dependencia en package.json====>   "sqlite3": "^5.1.7",
 */
- const db = knex({
-     client: 'sqlite3',
-     connection: {
-         filename: 'retrocomputers.db'
-     },
-     useNullAsDefault: true
- });
+//  const db = knex({
+//      client: 'sqlite3',
+//      connection: {
+//          filename: 'retrocomputers.db'
+//      },
+//      useNullAsDefault: true
+//  });
 
 // esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
 
-// const db = knex({
-//     client: 'mysql',
-//     connection: {
-//         host: 'localhost',
-//         port: 3306,
-//         user: 'user',
-//         password: 'password',
-//         database: 'cities'
-//     },
-//     useNullAsDefault: true
-// });
+ const db = knex({
+     client: 'mysql',
+     connection: {
+         host: 'localhost',
+         port: 3306,
+         user: 'mrubio9',
+         password: 'mrubio9',
+         database: 'tiendaonlineretrov5'
+     },
+     useNullAsDefault: true
+ });
 
 // Esta tercera es cuando lo mecanizamos todo, esta es la que se quedara
 
@@ -78,22 +78,21 @@ const registerProduct = (async (product_name, description, sale_price, stock_uni
         release_date: release_date,
         product_status: product_status,
         id_supplier: id_supplier
-    });
-    //OJO quita el punto y coma de aqui arriba cuando todo funcione
-    // .then(async (ids) => {
-    //     productId = ids[0];
-    // });
+    })
+     .then(async (ids) => {
+         productId = ids[0];
+     });
 
-    // const result = {
-    //     id: productId,
-    // };
+     const result = {
+         id: productId
+     };
     
-    // return result;
+     return result;
 });
 
 const modifyProduct = (async (id_product, product_name, description, sale_price, stock_units, image, release_date, product_status,id_supplier) => {
     // 
-    await db('products').where({ id_product: id_product }).update({
+    return await db('products').where({ id_product: id_product }).update({
         product_name: product_name,
         description: description,
         sale_price: sale_price,
@@ -106,7 +105,7 @@ const modifyProduct = (async (id_product, product_name, description, sale_price,
 });
 
 const removeProduct = (async (id_product) => {
-    await db('products').del().where({id_product: id_product});
+    return await db('products').del().where({id_product: id_product});
 });
 
 module.exports = {

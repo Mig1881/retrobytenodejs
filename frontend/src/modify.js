@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td } from './documentUtil.js';
+import { el, td, formatDateMySQL } from './documentUtil.js';
 
 var arrayIdsupplier = [];
 
@@ -30,7 +30,7 @@ window.loadProduct = function() {
             document.getElementById('description').value= product.description;
             document.getElementById('sale_price').value = product.sale_price;
             document.getElementById('stock_units').value = product.stock_units;
-            document.getElementById('release_date').value = product.release_date;
+            document.getElementById('release_date').value = formatDateMySQL(product.release_date);
             document.getElementById('product_status').value = product.product_status;
             document.getElementById('id_supplier').value = product.id_supplier;
             // document.getElementById('image').value = product.image;

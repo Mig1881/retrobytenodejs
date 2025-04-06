@@ -1,12 +1,24 @@
 const knex = require('knex');
 
+//  const db = knex({
+//      client: 'sqlite3',
+//      connection: {
+//          filename: 'retrocomputers.db'
+//      },
+//      useNullAsDefault: true
+//  });
+
  const db = knex({
-     client: 'sqlite3',
-     connection: {
-         filename: 'retrocomputers.db'
-     },
-     useNullAsDefault: true
- });
+      client: 'mysql',
+      connection: {
+          host: '127.0.0.1',
+          port: 3306,
+          user: 'mrubio9',
+          password: 'mrubio9',
+          database: 'tiendaonlineretrov5'
+      },
+      useNullAsDefault: true
+  });
 
 // esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
 
@@ -66,22 +78,21 @@ const registerUser = (async (name, username, password, role, tel, address, zip_c
         zip_code: zip_code,
         city : city,
         country: country
-    });
-    //OJO quita el punto y coma de aqui arriba cuando todo funcione
-    // .then(async (ids) => {
-    //     productId = ids[0];
-    // });
+    })
+    .then(async (ids) => {
+         userId = ids[0];
+     });
 
-    // const result = {
-    //     id: productId,
-    // };
+     const result = {
+         id: userId,
+     };
     
-    // return result;
+     return result;
 });
 
 const modifyUser = (async (id_user, name, password, role, tel, address, zip_code, city, country) => {
     //
-    await db('users').where({ id_user: id_user }).update({
+    return await db('users').where({ id_user: id_user }).update({
         name: name,
         password: password,
         role: role,
@@ -94,7 +105,7 @@ const modifyUser = (async (id_user, name, password, role, tel, address, zip_code
 });
 
 const removeUser = (async (id_user) => {
-    await db('users').del().where({id_user: id_user});
+    return await db('users').del().where({id_user: id_user});
 });
 
 module.exports = {
