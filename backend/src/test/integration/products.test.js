@@ -172,15 +172,15 @@ describe('products', () => {
    });
 
    describe('DELETE/products/:id_product', () => {
-    //AQUI Quitar los comentarios cuando lo subas a pruebas
-    // it('should delete product with id_product = 4', (done) => {
-    //   chai.request(app)
-    //     .delete('/products/4') 
-    //     .end((error, response) => {
-    //       response.should.have.status(204);
-    //       done();
-    //     });
-    // });
+    //Atencion en local hay que asegurarse que el registro existe para que se pueda borrar
+     it('should delete product with id_product = 4', (done) => {
+       chai.request(app)
+         .delete('/products/4') 
+         .end((error, response) => {
+           response.should.have.status(204);
+           done();
+         });
+     });
 
   
       it('validation should fail because this product is not a valid number', (done) => {

@@ -52,13 +52,13 @@ describe('products', () => {
                  });
          });
      });
-
+     // atencion en local hay que asegurarse que registro no exite, ya que name es UNIQUE
     describe('POST /suppliers', () => {
          it('should register a new supplier', (done) => {
              chai.request(app)
                  .post('/suppliers')
                  .send({
-                     name: 'Retro20bits',
+                     name: 'Retro36bits',
                      tel: '888888888',
                      address: 'Calle de la Union Jaquesa 8',
                      zip_code: "22700",
@@ -149,15 +149,15 @@ describe('products', () => {
    });
 
    describe('DELETE/suppliers/:id_supplier=9', () => {
-    // AQUI Descomentar 
-    // it('should delete supplier with id_supplier = 4', (done) => {
-    //   chai.request(app)
-    //     .delete('/suppliers/4') // Modificamos la ruta para incluir el id_product
-    //     .end((error, response) => {
-    //       response.should.have.status(204);
-    //       done();
-    //     });
-    // });
+    // Atencion en local haya que asegurarse que el registro ya existe 
+     it('should delete supplier with id_supplier = 4', (done) => {
+      chai.request(app)
+         .delete('/suppliers/4') // Modificamos la ruta para incluir el id_product
+         .end((error, response) => {
+           response.should.have.status(204);
+           done();
+         });
+     });
 
   
       it('validation should fail because this supplier is not a valid number', (done) => {

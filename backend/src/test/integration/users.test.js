@@ -53,19 +53,19 @@ describe('users', () => {
                  });
          });
      });
-
+    //Atencion en local hay que asegurarse que no existe el registro ya, ya que username es UNIQUE
     describe('POST /users', () => {
          it('should register a new user', (done) => {
              chai.request(app)
                  .post('/users')
                  .send({
                      name: 'pepe',
-                     username: 'pepe24',   
+                     username: 'pepe36',   
                      password :'p',
                      role: 'user',
-                     tel: '13131313',
-                     address: 'Calle de la pineda 13',
-                     zip_code: "13700",
+                     tel: '12121212',
+                     address: 'Calle de la pineda 12',
+                     zip_code: "12700",
                      city: 'Tarragona',
                      country: 'España'
                  })
@@ -150,16 +150,16 @@ describe('users', () => {
        });
    });
 
-   describe('DELETE/users/:id_user=9', () => {
-    // AQUI Descomentar 
-    //  it('should delete user with id_user = 3', (done) => {
-    //    chai.request(app)
-    //      .delete('/users/12') 
-    //      .end((error, response) => {
-    //        response.should.have.status(204);
-    //        done();
-    //      });
-    //  });
+   describe('DELETE/users/:id_user=14', () => {
+    // Atencion en local hay que asegurarse que el registro existe sino dara problemas
+      it('should delete user with id_user = 14', (done) => {
+        chai.request(app)
+          .delete('/users/12') 
+          .end((error, response) => {
+            response.should.have.status(204);
+            done();
+          });
+      });
 
   
       it('validation should fail because this user is not a valid number', (done) => {
