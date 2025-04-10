@@ -7,32 +7,32 @@ const knex = require('knex');
 //      },
 //      useNullAsDefault: true
 //  });
-
- const db = knex({
-      client: 'mysql',
-      connection: {
-          host: '127.0.0.1',
-          port: 3306,
-          user: 'mrubio9',
-          password: 'mrubio9',
-          database: 'tiendaonlineretrov5'
-      },
-      useNullAsDefault: true
-  });
+//conexion en local
+//  const db = knex({
+//       client: 'mysql',
+//       connection: {
+//           host: '127.0.0.1',
+//           port: 3306,
+//           user: 'mrubio9',
+//           password: 'mrubio9',
+//           database: 'tiendaonlineretrov5'
+//       },
+//       useNullAsDefault: true
+//   });
 
 // esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
 
-// const db = knex({
-//     client: 'mysql',
-//     connection: {
-//         host: 'localhost',
-//         port: 3306,
-//         user: 'user',
-//         password: 'password',
-//         database: 'cities'
-//     },
-//     useNullAsDefault: true
-// });
+const db = knex({
+     client: 'mysql',
+     connection: {
+         host: 'localhost',
+         port: 3306,
+         user: 'user',
+         password: 'password',
+         database: 'retrostore'
+     },
+     useNullAsDefault: true
+ });
 
 // Esta tercera es cuando lo mecanizamos todo, esta es la que se quedara
 

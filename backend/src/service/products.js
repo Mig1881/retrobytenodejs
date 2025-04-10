@@ -21,19 +21,31 @@ dependencia en package.json====>   "sqlite3": "^5.1.7",
 //      useNullAsDefault: true
 //  });
 
-// esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
+// esta segunda parte era cuando conectamos con mysql en local
+
+//  const db = knex({
+//      client: 'mysql',
+//      connection: {
+//          host: 'localhost',
+//          port: 3306,
+//          user: 'mrubio9',
+//          password: 'mrubio9',
+//          database: 'tiendaonlineretrov5'
+//      },
+//      useNullAsDefault: true
+//  });
 
  const db = knex({
-     client: 'mysql',
-     connection: {
-         host: 'localhost',
-         port: 3306,
-         user: 'mrubio9',
-         password: 'mrubio9',
-         database: 'tiendaonlineretrov5'
-     },
-     useNullAsDefault: true
- });
+      client: 'mysql',
+      connection: {
+          host: 'localhost',
+          port: 3306,
+          user: 'user',
+          password: 'password',
+          database: 'retrostore'
+      },
+      useNullAsDefault: true
+  });
 
 // Esta tercera es cuando lo mecanizamos todo, esta es la que se quedara
 

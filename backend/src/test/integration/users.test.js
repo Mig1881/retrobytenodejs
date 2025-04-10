@@ -109,9 +109,9 @@ describe('users', () => {
     });
 
     describe('PUT/users/:id_user', () => {
-        it('should modify a user', (done) => {
+        it('should modify a user 2', (done) => {
             chai.request(app)
-                .put('/users/6')
+                .put('/users/2')
                 .send({
                     name: 'Juan R',   
                     password :'j',
@@ -150,11 +150,11 @@ describe('users', () => {
        });
    });
 
-   describe('DELETE/users/:id_user=14', () => {
+   describe('DELETE/users/:id_user=4', () => {
     // Atencion en local hay que asegurarse que el registro existe sino dara problemas
-      it('should delete user with id_user = 14', (done) => {
+      it('should delete user with id_user = 4', (done) => {
         chai.request(app)
-          .delete('/users/12') 
+          .delete('/users/4') 
           .end((error, response) => {
             response.should.have.status(204);
             done();
