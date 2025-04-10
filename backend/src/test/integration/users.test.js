@@ -53,7 +53,7 @@ describe('users', () => {
                  });
          });
      });
-    //Atencion en local hay que asegurarse que no existe el registro ya, ya que username es UNIQUE
+
     describe('POST /users', () => {
          it('should register a new user', (done) => {
              chai.request(app)
