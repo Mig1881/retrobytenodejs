@@ -148,11 +148,11 @@ describe('products', () => {
        });
    });
 
-   describe('DELETE/suppliers/:id_supplier=9', () => {
+   describe('DELETE/suppliers/:id_supplier=6', () => {
     // Atencion en local haya que asegurarse que el registro ya existe 
-     it('should delete supplier with id_supplier = 4', (done) => {
+     it('should delete supplier with id_supplier = 6', (done) => {
       chai.request(app)
-         .delete('/suppliers/4') // Modificamos la ruta para incluir el id_product
+         .delete('/suppliers/6') // Modificamos la ruta para incluir el id_product
          .end((error, response) => {
            response.should.have.status(204);
            done();

@@ -1,0 +1,41 @@
+version: "3.4"
+name: cities
+services:
+  db:
+    image: mariadb:11.3.2
+    container_name: cities-db-dev
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_PORT: 3306,
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ CMD, healthcheck.sh, --connect, --innodb_initialized]
+      # esta linea es muy concreta para MariaDB, cada bd tendria la suya
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      # estas lineas son configurables
+    networks:
+      - network1
+  backend:
+    image: cities
+    container_name: cities-api
+    ports:
+      - "8081:8080"
+    depends_on:
+    # le decimos al backend que depende de la base de datos, que la base este bien healthy
+    # para comprobar que este healthy, tiene que hacer un healhcheck(arriba)
+      - db:
+          condition: service_healthy
+    networks:
+      - network1
+  # TODO Añadir el frontend
+networks:
+  network1:
+    driver: bridge
+  # creamos una red para que los dos servicios se vean, habra que ponerla en cada servicio 
+  # lo que es la api los exporto/expongo, lo que es la bd no, por eso abro los puertos
+  # Asi lo puedo probar en local 
