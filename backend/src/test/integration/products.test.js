@@ -172,7 +172,7 @@ describe('products', () => {
    });
 
    describe('DELETE/products/:id_product', () => {
-    //Atencion en local hay que asegurarse que el registro existe para que se pueda borrar
+    
      it('should delete product with id_product = 4', (done) => {
        chai.request(app)
          .delete('/products/4') 
