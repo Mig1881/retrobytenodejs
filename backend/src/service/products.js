@@ -1,11 +1,5 @@
 const knex = require('knex');
-
-// importanmos esta nueva libreria para tener las configuraciones mecanizadas
-// AQUI poner esto linea cuando este mecanizado
-// const { config } = require('../config/configuration');
-//hasta AQUI
-
-
+const { config } = require('../config/configuration');
 
 // Configuración de la base de datos: tipo, ubicación y otros parámetros
 //EL SERVICE ES EL UNICO QUE TIENE ACCESO A LA BASE DE DATOS
@@ -34,32 +28,32 @@ dependencia en package.json====>   "sqlite3": "^5.1.7",
 //      },
 //      useNullAsDefault: true
 //  });
+// 3 opcion conexion a mariadb en contenedor
+//  const db = knex({
+//       client: 'mysql',
+//       connection: {
+//           host: 'localhost',
+//           port: 3306,
+//           user: 'user',
+//           password: 'password',
+//           database: 'retrostore'
+//       },
+//       useNullAsDefault: true
+//   });
+
+
 
  const db = knex({
-      client: 'mysql',
-      connection: {
-          host: 'localhost',
-          port: 3306,
-          user: 'user',
-          password: 'password',
-          database: 'retrostore'
-      },
-      useNullAsDefault: true
-  });
-
-// Esta tercera es cuando lo mecanizamos todo, esta es la que se quedara
-
-// const db = knex({
-//     client: 'mysql',
-//     connection: {
-//         host: config.db.host,
-//         port: config.db.port,
-//         user: config.db.user,
-//         password: config.db.password,
-//         database: config.db.database
-//     },
-//     useNullAsDefault: true
-// });
+     client: 'mysql',
+     connection: {
+         host: config.db.host,
+         port: config.db.port,
+         user: config.db.user,
+         password: config.db.password,
+         database: config.db.database
+     },
+     useNullAsDefault: true
+ });
 
 // ESTA CAPA YA ES LA DE COMUNICACION CON LA BASE DE DATOS
 const findProducts = (async () => {
