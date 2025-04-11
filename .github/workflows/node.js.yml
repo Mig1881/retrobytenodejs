@@ -29,7 +29,9 @@ jobs:
     - name: Install Backend Dependencies
       run: npm install
       working-directory: ./backend
-    - run: docker compose -f docker-compose.dev.yaml up -d
+    - name: dev docker-compose
+      run: docker compose -f docker-compose.dev.yaml up -d
+      working-directory: ./backend
     - run: sleep 4s
     - name: Run Backend Tests
       run: npm test
