@@ -1,4 +1,5 @@
 const knex = require('knex');
+const { config } = require('../config/configuration');
 
 //  const db = knex({
 //      client: 'sqlite3',
@@ -22,31 +23,31 @@ const knex = require('knex');
 
 // esta segunda parte era cuando conectabamos con un contenedor en pruebas con mariaDb
 
-const db = knex({
-     client: 'mysql',
-     connection: {
-         host: 'localhost',
-         port: 3306,
-         user: 'user',
-         password: 'password',
-         database: 'retrostore'
-     },
-     useNullAsDefault: true
- });
+// const db = knex({
+//      client: 'mysql',
+//      connection: {
+//          host: 'localhost',
+//          port: 3306,
+//          user: 'user',
+//          password: 'password',
+//          database: 'retrostore'
+//      },
+//      useNullAsDefault: true
+//  });
 
 // Esta tercera es cuando lo mecanizamos todo, esta es la que se quedara
 
-// const db = knex({
-//     client: 'mysql',
-//     connection: {
-//         host: config.db.host,
-//         port: config.db.port,
-//         user: config.db.user,
-//         password: config.db.password,
-//         database: config.db.database
-//     },
-//     useNullAsDefault: true
-// });
+ const db = knex({
+     client: 'mysql',
+     connection: {
+         host: config.db.host,
+         port: config.db.port,
+         user: config.db.user,
+         password: config.db.password,
+         database: config.db.database
+     },
+     useNullAsDefault: true
+ });
 
 // ESTA CAPA YA ES LA DE COMUNICACION CON LA BASE DE DATOS
 const findSuppliers = (async () => {

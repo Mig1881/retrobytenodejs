@@ -1,9 +1,9 @@
 version: "3.4"
-name: cities
+name: retrostore
 services:
   db:
     image: mariadb:11.3.2
-    container_name: cities-db-dev
+    container_name: retrostore-db-dev
     environment:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
@@ -21,8 +21,8 @@ services:
     networks:
       - network1
   backend:
-    image: cities
-    container_name: cities-api
+    image: retrobyte
+    container_name: retrobyte-api
     ports:
       - "8081:8080"
     depends_on:
