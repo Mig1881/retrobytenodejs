@@ -18,7 +18,13 @@ icons.set('view',
 );
 
 
-// TODO Añadir más iconos
+//TODO Para evitar depender directamente de la IP publica de la EC2 en despliege AWS
+//Opciones: 1 Registrar un nombre de Dominio(para produccion)
+//          2 Utilizar lña DNS de un Balanceador de carga de AWS
+//          3 Utilizar el servicio API Gateway de AWS
+//De momento hay que cambiar manualmente en todo el Frontend localhost por la DNS publica de la EC2
+//Lo  menos costoso definir aqui una variable cons y luego importarlaç
+//Preguntar a Santi que es mejor.
 
 const el = function (elementId) {
     return document.getElementById(elementId);
@@ -32,7 +38,7 @@ const td = function(text) {
     return '<td>' + text + '</td>';
 }
 
-// parece ser que no hace falta pero puede venir bien para algo..
+// 
  function formatDateMySQL(fechaMySQL) {
     let fechaFormatoHTML = fechaMySQL.split("T")[0]; // Extrae 8 caracteres
     return fechaFormatoHTML;   
