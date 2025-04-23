@@ -6,7 +6,7 @@ import { el, td } from './documentUtil.js';
 window.viewUser = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const userName = queryParams.get('username');
-    axios.get('http://localhost:8081/users/' + userName)
+    axios.get('http://localhost:8080/users/' + userName)
         .then((response) => {
             const user = response.data;
             const userTable = el('tableBodyView');

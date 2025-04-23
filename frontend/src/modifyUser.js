@@ -38,7 +38,7 @@ window.loadUser = function() {
 
     // defino variable para despues modificar
     let userId;
-    axios.get('http://localhost:8081/users/' + userName)
+    axios.get('http://localhost:8080/users/' + userName)
         .then((response) => {
             const user = response.data;
             document.getElementById('name').value = user.name;
@@ -113,7 +113,7 @@ window.loadUser = function() {
             // const queryParams = new URLSearchParams(window.location.search);
             // const supplierId = queryParams.get('id_supplier');
 
-            axios.put('http://localhost:8081/users/' + userId, {
+            axios.put('http://localhost:8080/users/' + userId, {
                  name: name,
                  password: password,
                  role: role,

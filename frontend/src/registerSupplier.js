@@ -55,7 +55,7 @@ window.addSupplier = function() {
 
 
 
-    axios.post('http://localhost:8081/suppliers', {
+    axios.post('http://localhost:8080/suppliers', {
         name: name,
         tel: tel,
         address: address,

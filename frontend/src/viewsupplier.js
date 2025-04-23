@@ -6,7 +6,7 @@ import { el, td } from './documentUtil.js';
 window.viewSupplier = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const supplierId = queryParams.get('id_supplier');
-    axios.get('http://localhost:8081/suppliers/' + supplierId)
+    axios.get('http://localhost:8080/suppliers/' + supplierId)
         .then((response) => {
             const supplier = response.data;
             const supplierTable = el('tableBodyView');

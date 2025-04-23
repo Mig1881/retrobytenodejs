@@ -78,7 +78,7 @@ window.addUser = function() {
         notifyError('Username es un campo obligatorio');
         return;
     } else {
-        axios.get('http://localhost:8081/users/' + username)
+        axios.get('http://localhost:8080/users/' + username)
         .then((response) => {
 
             if (response.status == 200) {
@@ -88,7 +88,7 @@ window.addUser = function() {
                     notifyError('El Usernane ya existe, eliga otro');
                     return;
                 } else {
-                    axios.post('http://localhost:8081/users', {
+                    axios.post('http://localhost:8080/users', {
                         name: name,
                         username: username,
                         password: password,
