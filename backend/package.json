@@ -7,7 +7,8 @@
       "integration-test": "mocha src/test/integration --exit",
       "test": "npm run unit-test && npm run integration-test",
       "start": "node src/app.js",
-      "start-dev": "node src/app.js --config config.local.yaml"
+      "start-dev": "node src/app.js --config config.local.yaml",
+      "start-prod": "node src/app.js --config config.prod.yaml"
     },
     "author": "Miguel Angel Rubio",
     "license": "GPL-2.0-only",

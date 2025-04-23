@@ -1,0 +1,43 @@
+version: "3.4"
+name: retrobyte
+services:
+  db:
+    image: mariadb:11.3.2
+    container_name: retrostore-db
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_PORT: 3306,
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - network1
+  backend:
+    image: retrobyte-be
+    container_name: retrobyte-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - network1
+  frontend:
+    image: retrobyte-fe
+    container_name: retrobyte-ui
+    ports:
+      - "1234:1234"
+    networks:
+      - network1
+networks:
+  network1:
+    driver: bridge
+  

@@ -10,7 +10,7 @@ window.verifyUser = function() {
         notifyError('Debes de rellenar los dos campos Username y Password');
         return;
     }
-    axios.get('http://localhost:8081/users/' + username)
+    axios.get('http://localhost:8080/users/' + username)
         .then((response) => {
 
             if (response.status == 200) {
