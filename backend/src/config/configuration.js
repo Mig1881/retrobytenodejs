@@ -4,8 +4,8 @@ const fs = require('fs');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
-// Lee el fichero de configuración, por defecto es el de produccion aunque podria ser al reves
-let configFile = 'config.prod.yaml';
+// Lee el fichero de configuración, por defecto es el de test aunque podria ser al reves
+let configFile = 'config.test.yaml';
 // con la siguiente linea posibilito pasarle argumentos a los comandos node ya sabes con --
 const argv = yargs(hideBin(process.argv)).argv;
 //si en esos argumentos me han pasado una opcion de config...
