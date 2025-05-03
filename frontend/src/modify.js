@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td, formatDateMySQL } from './documentUtil.js';
+import { el, td, formatDateMySQL, host } from './documentUtil.js';
 
 var arrayIdsupplier = [];
 
 window.loadProduct = function() {
     //leo suppliers para comprobacion de codigo de supplier
-    axios.get('http://localhost:8080/suppliers')
+    axios.get(host + 'suppliers')
     .then((response) => {
         const supplierList = response.data;
         const supplierTable = el('tableBody');
@@ -23,7 +23,7 @@ window.loadProduct = function() {
 
     const queryParams = new URLSearchParams(window.location.search);
     const productId = queryParams.get('id_product');
-    axios.get('http://localhost:8080/products/' + productId)
+    axios.get(host + 'products/' + productId)
         .then((response) => {
             const product = response.data;
             document.getElementById('product_name').value = product.product_name;
@@ -107,7 +107,7 @@ window.loadProduct = function() {
                 const formData = new FormData();
                 formData.append('image', imageFile);
                 
-                axios.post('http://localhost:8080/images', formData, {
+                axios.post(host + 'images', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'   
                      }
@@ -120,7 +120,7 @@ window.loadProduct = function() {
                         const productId = queryParams.get('id_product');
 
 
-                        axios.put('http://localhost:8080/products/' + productId, {
+                        axios.put(host + 'products/' + productId, {
                             product_name: product_name,
                             description: description,
                             sale_price: sale_price,

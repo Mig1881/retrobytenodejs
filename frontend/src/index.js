@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { el, icon, td } from './documentUtil';
+import { el, icon, td, host } from './documentUtil';
 import { notifyOk } from './dialogUtil';
 
 window.readProducts = function() {
@@ -67,7 +67,7 @@ window.readProducts = function() {
          }
     };
 
-    axios.get('http://localhost:8080/products')
+    axios.get(host + 'products')
         .then((response) => {
             const productList = response.data;
             const productTable = el('tableBody');
@@ -109,7 +109,7 @@ window.readProducts = function() {
 // Esta claro que asi no se pasan los codigos( clave = valor???)
 window.removeProduct = function(id_product) {
     if (confirm('¿Está seguro de que desea eliminar este producto?')) {
-        axios.delete('http://localhost:8080/products/' + id_product)
+        axios.delete(host + 'products/' + id_product)
             .then((response) => {
                 if (response.status == 204) {
                     notifyOk('Producto eliminado correctamente');

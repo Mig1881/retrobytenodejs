@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { el, icon, td } from './documentUtil';
+import { el, icon, td, host } from './documentUtil';
 import { notifyOk } from './dialogUtil';
 
 window.readUsers = function() {
-    axios.get('http://localhost:8080/users')
+    axios.get(host + 'users')
         .then((response) => {
             const userList = response.data;
             const userTable = el('tableBody');
@@ -31,7 +31,7 @@ window.readUsers = function() {
 // 
 window.removeUser = function(id_user) {
     if (confirm('¿Está seguro de que desea eliminar este usuario?')) {
-        axios.delete('http://localhost:8080/users/' + id_user)
+        axios.delete(host + 'users/' + id_user)
             .then((response) => {
                 if (response.status == 204) {
                     notifyOk('Usuario eliminado correctamente');

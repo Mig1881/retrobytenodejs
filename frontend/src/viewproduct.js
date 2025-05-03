@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td } from './documentUtil.js';
+import { el, td, host } from './documentUtil.js';
 
 // window.viewProduct = function() {
 //     const queryParams = new URLSearchParams(window.location.search);
@@ -42,12 +42,12 @@ import { el, td } from './documentUtil.js';
 window.viewProduct = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const productId = queryParams.get('id_product');
-    axios.get('http://localhost:8080/products/' + productId)
+    axios.get(host + 'products/' + productId)
         .then((response) => {
             const product = response.data;
             //Contruimos primero la linea de imagen
             const nameImage = el('srcImage');
-            nameImage.innerHTML += '<img src="http://localhost:8080/' +  product.image + '" + alt="'+product.image+'"+ width="100%"/>';
+            nameImage.innerHTML += '<img src="' + host +  product.image + '" + alt="'+product.image+'"+ width="100%"/>';
             
             // Boton de compra segun rol
             const salesButton = el('salesButton');
@@ -91,7 +91,7 @@ window.viewProduct = function() {
                                 td(product.stock_units);
                 productTable.appendChild(row5);
                 // Relaciones de las dos tablas Products y Suppliers
-                axios.get('http://localhost:8080/suppliers/' + product.id_supplier)
+                axios.get(host + 'suppliers/' + product.id_supplier)
                 .then((response) => {
                     const supplier = response.data;
                     const row6 = document.createElement('tr');
@@ -115,7 +115,7 @@ window.viewProduct = function() {
 window.addOrder = function(id_product) {
     let idProduct = id_product;
     let stockUnits = 0
-    axios.put('http://localhost:8080/products/' + idProduct, {
+    axios.put(host + 'products/' + idProduct, {
         stock_units: stockUnits
     });    
     notifyOk('Order done');

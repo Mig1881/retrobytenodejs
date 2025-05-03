@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { el, icon, td } from './documentUtil';
+import { el, icon, td, host } from './documentUtil';
 import { notifyOk } from './dialogUtil';
 
 window.readSuppliers = function() {
-    axios.get('http://localhost:8080/suppliers')
+    axios.get(host + 'suppliers')
         .then((response) => {
             const supplierList = response.data;
             const supplierTable = el('tableBody');
@@ -31,7 +31,7 @@ window.readSuppliers = function() {
 // 
 window.removeSupplier = function(id_supplier) {
     if (confirm('¿Está seguro de que desea eliminar este proveedor?')) {
-        axios.delete('http://localhost:8080/suppliers/' + id_supplier)
+        axios.delete(host + 'suppliers/' + id_supplier)
             .then((response) => {
                 if (response.status == 204) {
                     notifyOk('Proveedor eliminado correctamente');

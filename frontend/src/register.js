@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td } from './documentUtil.js';
+import { el, td, host } from './documentUtil.js';
 
 
 var arrayIdsupplier = [];
 
 window.readCodeSuppliers = function() {
-    axios.get('http://localhost:8080/suppliers')
+    axios.get(host + 'suppliers')
     .then((response) => {
         const supplierList = response.data;
         const supplierTable = el('tableBody');
@@ -95,7 +95,7 @@ window.addProduct = function() {
         const formData = new FormData();
         formData.append('image', imageFile);
         
-        axios.post('http://localhost:8080/images', formData, {
+        axios.post(host + 'images', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'   
              }
@@ -104,7 +104,7 @@ window.addProduct = function() {
                 
                 imageAux = response.data;
                 //Nombre de la imagen del producto afectado
-                axios.post('http://localhost:8080/products', {
+                axios.post(host + 'products', {
                     product_name: product_name,
                     description: description,
                     sale_price: sale_price,
