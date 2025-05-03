@@ -37,8 +37,9 @@ const icon = function(iconName) {
 const td = function(text) {
     return '<td>' + text + '</td>';
 }
-
-// 
+// atencion cambiar localhost por la direccion ip cuando se despliege en AWS y despues construir la imagen
+const host = 'http://localhost:8080/';
+     
  function formatDateMySQL(fechaMySQL) {
     let fechaFormatoHTML = fechaMySQL.split("T")[0]; // Extrae 8 caracteres
     return fechaFormatoHTML;   
@@ -50,5 +51,6 @@ module.exports = {
     el,
     icon,
     td,
+    host,
     formatDateMySQL
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el } from './documentUtil.js';
+import { el, host } from './documentUtil.js';
 
 window.addSupplier = function() {
     const name = document.getElementById('name').value;
@@ -55,7 +55,7 @@ window.addSupplier = function() {
 
 
 
-    axios.post('http://localhost:8080/suppliers', {
+    axios.post(host + 'suppliers', {
         name: name,
         tel: tel,
         address: address,

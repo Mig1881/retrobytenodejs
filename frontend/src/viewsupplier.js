@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td } from './documentUtil.js';
+import { el, td, host } from './documentUtil.js';
 // no se como se pasa el codigo estas dos lineas igual estan mal 
 
 window.viewSupplier = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const supplierId = queryParams.get('id_supplier');
-    axios.get('http://localhost:8080/suppliers/' + supplierId)
+    axios.get(host + 'suppliers/' + supplierId)
         .then((response) => {
             const supplier = response.data;
             const supplierTable = el('tableBodyView');

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el, td } from './documentUtil.js';
+import { el, td, host } from './documentUtil.js';
 // no se como se pasa el codigo estas dos lineas igual estan mal 
 
 window.verifyUser = function() {
@@ -10,7 +10,7 @@ window.verifyUser = function() {
         notifyError('Debes de rellenar los dos campos Username y Password');
         return;
     }
-    axios.get('http://localhost:8080/users/' + username)
+    axios.get(host + 'users/' + username)
         .then((response) => {
 
             if (response.status == 200) {

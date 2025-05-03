@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
+import { host } from './documentUtil.js';
 
 window.loadSupplier = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const supplierId = queryParams.get('id_supplier');
-    axios.get('http://localhost:8080/suppliers/' + supplierId)
+    axios.get(host + 'suppliers/' + supplierId)
         .then((response) => {
             const supplier = response.data;
             document.getElementById('name').value = supplier.name;
@@ -74,7 +75,7 @@ window.loadSupplier = function() {
             const supplierId = queryParams.get('id_supplier');
 
 
-            axios.put('http://localhost:8080/suppliers/' + supplierId, {
+            axios.put(host + 'suppliers/' + supplierId, {
                  name: name,
                  tel: tel,
                  address: address,

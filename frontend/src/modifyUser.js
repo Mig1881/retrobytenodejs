@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
+import { host } from './documentUtil.js';
 
 window.loadUser = function() {
     // como puede venir de dos sitios, hay que diferenciar el quien se quiere modificar
@@ -38,7 +39,7 @@ window.loadUser = function() {
 
     // defino variable para despues modificar
     let userId;
-    axios.get('http://localhost:8080/users/' + userName)
+    axios.get(host + 'users/' + userName)
         .then((response) => {
             const user = response.data;
             document.getElementById('name').value = user.name;
@@ -113,7 +114,7 @@ window.loadUser = function() {
             // const queryParams = new URLSearchParams(window.location.search);
             // const supplierId = queryParams.get('id_supplier');
 
-            axios.put('http://localhost:8080/users/' + userId, {
+            axios.put(host + 'users/' + userId, {
                  name: name,
                  password: password,
                  role: role,

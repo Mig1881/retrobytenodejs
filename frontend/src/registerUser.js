@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el } from './documentUtil.js';
+import { el, host } from './documentUtil.js';
 
 window.addUser = function() {
     const name = document.getElementById('name').value;
@@ -78,7 +78,7 @@ window.addUser = function() {
         notifyError('Username es un campo obligatorio');
         return;
     } else {
-        axios.get('http://localhost:8080/users/' + username)
+        axios.get(host + 'users/' + username)
         .then((response) => {
 
             if (response.status == 200) {
@@ -88,7 +88,7 @@ window.addUser = function() {
                     notifyError('El Usernane ya existe, eliga otro');
                     return;
                 } else {
-                    axios.post('http://localhost:8080/users', {
+                    axios.post(host + 'users', {
                         name: name,
                         username: username,
                         password: password,
