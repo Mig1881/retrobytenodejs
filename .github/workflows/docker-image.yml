@@ -15,17 +15,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the backend Docker image
-      run: docker build --no-cache . --file backend/Dockerfile --tag retrobyte-be:$(date +%s)
-    - name: Build the frontend Docker image  
-      run: docker build --no-cache . --file frontend/Dockerfile --tag retrobyte-fe:$(date +%s)
+      run: docker build --no-cache . --file backend/Dockerfile --tag retrobyte-be:latest
+    - name: Build the frontend Docker image
+      run: docker build --no-cache . --file frontend/Dockerfile --tag retrobyte-fe:latest
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Tag the backend Docker image
-      run: docker tag retrobyte-be:$(date +%s) mig1881/retrobyte-be:$(date +%s)
-    - name: Tag the frontend Docker image  
-      run: docker tag retrobyte-fe:$(date +%s) mig1881/retrobyte-fe:$(date +%s)
+      run: docker tag retrobyte-be:latest mig1881/retrobyte-be:$(date +%s)
+    - name: Tag the frontend Docker image
+      run: docker tag retrobyte-fe:latest mig1881/retrobyte-fe:$(date +%s)
     - name: Push the backend Docker image to Docker Hub
       run: docker push mig1881/retrobyte-be:$(date +%s)
     - name: Push the frontend Docker image to Docker Hub
       run: docker push mig1881/retrobyte-fe:$(date +%s)
-
