@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the backend Docker image
-      run: docker build . --file backend/Dockerfile --tag retrobyte-be:$(date +%s)
+      run: docker build --no-cache . --file backend/Dockerfile --tag retrobyte-be:$(date +%s)
     - name: Build the frontend Docker image  
-      run: docker build . --file frontend/Dockerfile --tag retrobyte-fe:$(date +%s)
+      run: docker build --no-cache . --file frontend/Dockerfile --tag retrobyte-fe:$(date +%s)
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Tag the backend Docker image
