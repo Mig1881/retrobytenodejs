@@ -7,13 +7,13 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
+    - name: Get timestamp
+      id: timestamp
+      run: echo "TIMESTAMP=$(date +%s)" >> "$GITHUB_OUTPUT"
     - name: Build the backend Docker image
       run: docker build --no-cache . --file backend/Dockerfile --tag retrobyte-be:latest
     - name: Build the frontend Docker image
@@ -21,10 +21,10 @@ jobs:
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Tag the backend Docker image
-      run: docker tag retrobyte-be:latest mig1881/retrobyte-be:$(date +%s)
+      run: docker tag retrobyte-be:latest mig1881/retrobyte-be:${{ steps.timestamp.outputs.TIMESTAMP }}
     - name: Tag the frontend Docker image
-      run: docker tag retrobyte-fe:latest mig1881/retrobyte-fe:$(date +%s)
+      run: docker tag retrobyte-fe:latest mig1881/retrobyte-fe:${{ steps.timestamp.outputs.TIMESTAMP }}
     - name: Push the backend Docker image to Docker Hub
-      run: docker push mig1881/retrobyte-be:$(date +%s)
+      run: docker push mig1881/retrobyte-be:${{ steps.timestamp.outputs.TIMESTAMP }}
     - name: Push the frontend Docker image to Docker Hub
-      run: docker push mig1881/retrobyte-fe:$(date +%s)
+      run: docker push mig1881/retrobyte-fe:${{ steps.timestamp.outputs.TIMESTAMP }}
