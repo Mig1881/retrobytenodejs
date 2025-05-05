@@ -32,42 +32,42 @@ window.loadSupplier = function() {
 
             // Validación de datos
             if (name === '') {
-                notifyError('El nombre del proveedor es un campo obligatorio');
+                notifyError('Supplier name is required');
                 return;
             }
 
             if (tel === '') {
-                notifyError('Telefono es un campo obligatorio');
+                notifyError('Telephone is required');
                 return;
             }
 
             if (address === '') {
-                notifyError('Direccion es un campo obligatorio');
+                notifyError('Address is required');
                 return;
             }
 
             if (zip_code === '') {
-                notifyError('Codigo postal es un campo obligatorio');
+                notifyError('Zip Code is required');
                 return;
             }
 
             if (city === '') {
-                notifyError('Ciudad es un campo obligatorio');
+                notifyError('City is required');
                 return;
             }
 
             if (country === '') {
-                notifyError('Pais es un campo obligatorio');
+                notifyError('Country is required');
                 return;
             }
 
             if (website === '') {
-                notifyError('Sitio Web es un campo obligatorio');
+                notifyError('Website is required');
                 return;
             }
 
             if (email === '') {
-                notifyError('Correo electronico es un campo obligatorio');
+                notifyError('Email is required');
                 return;
             }
 
@@ -89,9 +89,9 @@ window.loadSupplier = function() {
              .then((response) => {
                 // Confirmar al usuario que todo ha ido bien (o mal)
                 if (response.status == 204) {
-                    notifyOk('Proveedor Modificado');
+                    notifyOk('Supplier modified');
                 } else {
-                    notifyError('Error en la modificacion del proveedor, proveedor no modificado');
+                    notifyError('Error modifying supplier');
                 }
             });
 

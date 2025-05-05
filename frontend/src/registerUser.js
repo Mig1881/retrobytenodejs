@@ -16,66 +16,66 @@ window.addUser = function() {
 
     // Validación de datos
     if (name === '') {
-        notifyError('El nombre del usuario es un campo obligatorio');
+        notifyError('Username is required');
         return;
     }
     
     if (password === '') {
-        notifyError('Password es un campo obligatorio');
+        notifyError('Password is required');
         return;
     }
     // Solo los administradores pueden hacer a otros administradores
     if (role === '') {
-        notifyError('Role es un campo obligatorio');
+        notifyError('Role is required');
         return;
     } else {
         let roleSession = sessionStorage.getItem("role");
         if (roleSession != 'admin') {
             if (role == 'admin') {
-                notifyError('Solo lo puede hacer otro admin');
+                notifyError('Only admins can create admins');
                 return;
             } else {
                 if(role != 'user'){
-                    notifyError('role tiene que ser user');
+                    notifyError('role has to be user');
                     return; 
                 }
             }
         } else {
             if (!(role == 'admin' || role == 'user ')) {
-                notifyError('role tiene que ser user o admin');
+                notifyError('role has to be user or admin');
                 return;
             }
         }
     }    
 
     if (tel === '') {
-        notifyError('Tel es un campo obligatorio');
+        notifyError('Telephone is required');
         return;
     }
 
     if (address === '') {
-        notifyError('Adrress es un campo obligatorio');
+        notifyError('Adrress is required');
         return;
     }
 
 
     if (zip_code === '') {
-        notifyError('Codigo postal es un campo obligatorio');
+        notifyError('Postalcode is required');
         return;
     }
 
     if (city === '') {
-        notifyError('Ciudad es un campo obligatorio');
+        notifyError('City is required');
         return;
     }
 
     if (country === '') {
-        notifyError('Pais es un campo obligatorio');
+        notifyError('Country is required');
         return;
     }
     //Username es clave unica, debe ser siempre distinto, verificacion
     if (username === '') {
-        notifyError('Username es un campo obligatorio');
+        notifyError('Username is required');
         return;
     } else {
         axios.get(host + 'users/' + username)
@@ -85,7 +85,7 @@ window.addUser = function() {
                 const user = response.data;
                 console.log(username);
                 if (user.username == username){
-                    notifyError('El Usernane ya existe, eliga otro');
+                    notifyError('Username already in use');
                     return;
                 } else {
                     axios.post(host + 'users', {
@@ -102,7 +102,7 @@ window.addUser = function() {
                     .then((response) => {
                         // Confirmar al usuario que todo ha ido bien (o mal)
                         if (response.status == 201) {
-                            notifyOk('Usuario Registrado');
+                            notifyOk('User Registered');
                             //Limpiar el formulario
                             el('name').value = '';
                             el('username').value = '';
@@ -114,7 +114,7 @@ window.addUser = function() {
                             el('city').value = '';
                             el('country').value = '';
                         } else {
-                            notifyError('Error en el registro del Usuario');
+                            notifyError('Error registering user');
                         }
                     });
 

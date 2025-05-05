@@ -30,14 +30,14 @@ window.readUsers = function() {
 };
 // 
 window.removeUser = function(id_user) {
-    if (confirm('¿Está seguro de que desea eliminar este usuario?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
         axios.delete(host + 'users/' + id_user)
             .then((response) => {
                 if (response.status == 204) {
                     notifyOk('Usuario eliminado correctamente');
                     el('user-' + id_user).remove();
                 } else {
-                    notifyError('Error en la eliminacion del usuario, usuario no eliminado');
+                    notifyError('Error deleting user, user not deleted');
                 }
             });
     }
