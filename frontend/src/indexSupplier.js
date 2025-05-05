@@ -30,14 +30,14 @@ window.readSuppliers = function() {
 };
 // 
 window.removeSupplier = function(id_supplier) {
-    if (confirm('¿Está seguro de que desea eliminar este proveedor?')) {
+    if (confirm('Are you sure you want to delete this supplier?')) {
         axios.delete(host + 'suppliers/' + id_supplier)
             .then((response) => {
                 if (response.status == 204) {
-                    notifyOk('Proveedor eliminado correctamente');
+                    notifyOk('Supplier deleted successfully');
                     el('supplier-' + id_supplier).remove();
                 } else {
-                    notifyError('Error en la eliminacion del proveedor, proveedor no eliminado');
+                    notifyError('Error deleting supplier');
                 }
             });
     }

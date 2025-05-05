@@ -14,7 +14,7 @@ window.loadUser = function() {
         let adminHTMLElement05Interior = document.createElement('a');
         adminHTMLElement05Interior.classList.add("nav-link");
         adminHTMLElement05Interior.href = 'indexUser.html';
-        let interior05 = document.createTextNode('Listado de Usuarios');
+        let interior05 = document.createTextNode('User List');
         adminHTMLElement05Interior.appendChild(interior05);
         adminHTMLElement05.appendChild(adminHTMLElement05Interior);
         document.getElementById("menuUserAdmin").parentElement.appendChild(adminHTMLElement05);
@@ -28,7 +28,7 @@ window.loadUser = function() {
         let adminHTMLElement06Interior = document.createElement('a');
         adminHTMLElement06Interior.classList.add("nav-link");
         adminHTMLElement06Interior.href = 'index.html';
-        let interior06 = document.createTextNode('Listado de Productos');
+        let interior06 = document.createTextNode('Product List');
         adminHTMLElement06Interior.appendChild(interior06);
         adminHTMLElement06.appendChild(adminHTMLElement06Interior);
         document.getElementById("menuUserAdmin").parentElement.appendChild(adminHTMLElement06);
@@ -70,42 +70,60 @@ window.loadUser = function() {
 
             // Validación de datos
             if (name === '') {
-                notifyError('El nombre del usuario es un campo obligatorio');
+                notifyError('Username required');
                 return;
             }
 
             if (password === '') {
-                notifyError('Password es un campo obligatorio');
+                notifyError('Password required');
                 return;
             }
 
             if (role === '') {
-                notifyError('Role es un campo obligatorio');
+                notifyError('Role required');
                 return;
-            } 
+            } else {
+                let roleSession = sessionStorage.getItem("role");
+                if (roleSession != 'admin') {
+                    if (role == 'admin') {
+                        notifyError('Admin can be created just by another admin');
+                        return;
+                    } else {
+                        if(role != 'user'){
+                            notifyError('Role need to be user');
+                            return; 
+                        }
+                    }
+                } else {
+                    if (!(role == 'admin' || role == 'user ')) {
+                        notifyError('Role have to be user or admin');
+                        return;
+                    }
+                }
+            }    
 
             if (tel === '') {
-                notifyError('Telefono es un campo obligatorio');
+                notifyError('Phone Number required');
                 return;
             }
 
             if (address === '') {
-                notifyError('Direccion es un campo obligatorio');
+                notifyError('Address required');
                 return;
             }
 
             if (zip_code === '') {
-                notifyError('Codigo postal es un campo obligatorio');
+                notifyError('Postcode required');
                 return;
             }
 
             if (city === '') {
-                notifyError('Ciudad es un campo obligatorio');
+                notifyError('City required');
                 return;
             }
 
             if (country === '') {
-                notifyError('Pais es un campo obligatorio');
+                notifyError('Country required');
                 return;
             }
 
@@ -129,9 +147,9 @@ window.loadUser = function() {
              .then((response) => {
                 // Confirmar al usuario que todo ha ido bien (o mal)
                 if (response.status == 204) {
-                    notifyOk('Usuario Modificado');
+                    notifyOk('User Modified');
                 } else {
-                    notifyError('Error en la modificacion del usuario, proveedor no modificado');
+                    notifyError('Error. Supplier not modified.');
                 }
             });
 

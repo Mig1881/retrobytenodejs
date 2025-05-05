@@ -52,32 +52,32 @@ window.loadProduct = function() {
 
             //Validación de datos
             if (product_name === '') {
-                notifyError('El nombre del producto es un campo obligatorio');
+                notifyError('Product name is required');
                 return;
             }
 
             if (description === '') {
-                notifyError('Descripcion es un campo obligatorio');
+                notifyError('Descripction is required');
                 return;
             }
 
             if (sale_price === '') {
-                notifyError('Precio de venta es un campo obligatorio');
+                notifyError('Sale Price is required');
                 return;
             }
 
             if (stock_units === '') {
-                notifyError('El unidades en stock es un campo obligatorio');
+                notifyError('Stocks Units is required');
                 return;
             }
         
             if (release_date === '') {
-                notifyError('Fecha de lanzamiento es un campo obligatorio');
+                notifyError('Release date is required');
                 return;
             }
         
             if (product_status === '') {
-                notifyError('Estado del producto es un campo obligatorio');
+                notifyError('Product Status is required');
                 return;
             }
         
@@ -89,16 +89,16 @@ window.loadProduct = function() {
                        }
                     }
                     if (!igualTest){
-                        notifyError('Codigo proveedor no encontrado');
+                        notifyError('Supplier Code not found');
                         return;
                     }
             } else {
-                    notifyError('Codigo proveedor es un campo obligatorio');
+                    notifyError('Supplier code is required');
                     return;
             }
 
             if (image === '') {
-                notifyError('Imagen es un campo obligatorio');
+                notifyError('Image is required');
                 return;
             } else {
                 const imageFile = el('image').files[0];
@@ -112,7 +112,7 @@ window.loadProduct = function() {
                         'Content-Type': 'multipart/form-data'   
                      }
                     }).then((response) => {
-                        notifyOk('Los datos de imagen se han registrado correctamente');
+                        notifyOk('Image has been registered successfully');
                         
                         imageAux = response.data;
                         //Nombre de la imagen del producto afectado
@@ -133,14 +133,14 @@ window.loadProduct = function() {
                         .then((response) => {
                             // Confirmar al usuario que todo ha ido bien (o mal)
                             if (response.status == 204) {
-                                notifyOk('Producto Modificado');
+                                notifyOk('Product modified');
                             } else {
-                                notifyError('Error en la modificacion del producto, producto no modificado');
+                                notifyError('Error modifying product');
                             }
                         });
         
                         }).catch((error) => {
-                            notifyError('Se ha producido un error al enviar los datos de imagen');
+                            notifyError('Error sending image data');
                             console.log(error);
                         });
         
