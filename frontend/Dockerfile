@@ -1,7 +1,5 @@
 FROM node:alpine
-WORKDIR /app
-COPY frontend/package*.json ./
-RUN rm -rf node_modules
+WORKDIR /home
+COPY ./ ./
 RUN npm install
-COPY frontend/. .
 CMD ["npm", "start"]

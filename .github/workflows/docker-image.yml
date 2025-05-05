@@ -15,9 +15,9 @@ jobs:
       id: timestamp
       run: echo "TIMESTAMP=$(date +%s)" >> "$GITHUB_OUTPUT"
     - name: Build the backend Docker image
-      run: docker build --no-cache . --file backend/Dockerfile --tag retrobyte-be:latest
+      run: docker build --no-cache . --file backend/Dockerfile.github --tag retrobyte-be:latest
     - name: Build the frontend Docker image
-      run: docker build --no-cache . --file frontend/Dockerfile --tag retrobyte-fe:latest
+      run: docker build --no-cache . --file frontend/Dockerfile.github --tag retrobyte-fe:latest
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Tag the backend Docker image
