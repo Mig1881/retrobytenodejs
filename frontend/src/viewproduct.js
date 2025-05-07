@@ -2,7 +2,7 @@ import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
 import { el, td, host } from './documentUtil.js';
 
-
+let product_aux = {};
 window.viewProduct = function() {
     const queryParams = new URLSearchParams(window.location.search);
     const productId = queryParams.get('id_product');
@@ -76,11 +76,19 @@ window.viewProduct = function() {
         });
 };
 
-window.addOrder = function(id_product) {
-    let idProduct = id_product;
-    let stockUnits = 0
+window.addOrder = function(product_id) {
+    let idProduct = product_id;
+    let stockUnits = 0;
+    let fechaFormato = product_aux.release_date.split("T")[0];
     axios.put(host + 'products/' + idProduct, {
-        stock_units: stockUnits
+        product_name: product_aux.product_name,
+        description: product_aux.description,
+        sale_price: product_aux.sale_price,
+        stock_units: stockUnits,
+        image: product_aux.image,
+        release_date: fechaFormato,
+        product_status: product_aux.product_status,
+        id_supplier: product_aux.id_supplier
     });    
     notifyOk('Order done');
                         
